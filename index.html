@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-fs="m">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#151A24">
+<meta name="description" content="MTH603 Numerical Analysis — complete final term revision guide for Virtual University, Lectures 19 to 45. Built for phones.">
+<title>MTH603 Final Term — Numerical Analysis Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%23151A24%27/%3E%3Ctext x=%2716%27 y=%2723%27 font-size=%2718%27 font-family=%27monospace%27 fill=%27%233B4CD8%27 text-anchor=%27middle%27%3E%CE%94%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__row">
+    <div class="brand">MTH603 Revision<small>Numerical Analysis · Lec 19–45</small></div>
+    <button class="iconbtn" id="fsBtn" type="button" title="Change text size" aria-label="Change text size">Aa</button>
+    <button class="iconbtn" id="themeBtn" type="button" title="Switch light and dark" aria-label="Switch light and dark">☾</button>
+  </div>
+  <div class="search">
+    <label for="searchInput" class="visually-hidden" style="position:absolute;left:-9999px">Search the guide</label>
+    <input id="searchInput" type="search" placeholder="Search — try “Simpson”, “k2”, “radians”…" autocomplete="off">
+  </div>
+  <div class="progress">
+    <span>PROGRESS</span>
+    <span class="progress__track"><span class="progress__fill" id="progressFill"></span></span>
+    <span id="progressLabel">0/0</span>
+  </div>
+</header>
+
+<div class="bottombar">
+  <button class="btn" id="tocBtn" type="button">☰ Contents</button>
+  <button class="btn btn--ghost" id="expandBtn" type="button">Expand all</button>
+</div>
+
+<main>
+
+  <section class="hero">
+    <span class="eyebrow">Virtual University · Final Term</span>
+    <h1>Everything in MTH603, rebuilt for your phone.</h1>
+    <p>Lectures 19–45 in full — from the official handouts, the lecture slides, and your practice question banks. Every method starts with a plain-English explanation, then the formula, then a worked example you can step through one line at a time.</p>
+    <div class="hero__cta">
+      <a class="btn" href="#basics">Start with the basics</a>
+      <a class="btn btn--ghost" href="#lastminute">Jump to last-minute sheet</a>
+    </div>
+  </section>
+
+  <p class="noresults">No section matches that search. Try a shorter word.</p>
+
+
+<details class="sec" id="start">
+  <summary class="sec__head">
+    <span class="sec__num">00</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Start here — how to use this in 4 hours</span>
+      <span class="sec__meta"><span class="pill pill--must">Must know</span><span class="pill pill--low">Orientation</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<p>This is your whole MTH603 final term syllabus (Lectures 19–45), rebuilt for a phone. Everything is here — you do not need the handouts open alongside it.</p>
+
+<div class="box box--plain"><span class="box__label">In plain words</span><p>Every topic follows the same shape, so you always know what you are looking at:</p>
+<ul>
+<li><b>In plain words</b> — the idea with no symbols at all. Read this first, always.</li>
+<li><b>Formula slip</b> — the formula on ruled paper, exactly as you must write it in the exam.</li>
+<li><b>What each symbol means</b> — every letter decoded.</li>
+<li><b>Worked example</b> — tap <i>Next step</i> and watch it build one line at a time.</li>
+<li><b>Common mistake</b> and <b>Exam alert</b> — where marks get lost.</li>
+<li><b>Practice questions</b> — tap an answer, get told why.</li>
+</ul></div>
+
+<h3>Your 4-hour plan</h3>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Time</th><th>Do this</th></tr></thead><tbody><tr><td>0:00–0:20</td><td>Section 01 — Maths basics. <b>Do not skip this if symbols confuse you.</b></td></tr><tr><td>0:20–1:05</td><td>Sections 02–04 — Operators and the two Newton formulas</td></tr><tr><td>1:05–1:35</td><td>Sections 05–07 — Lagrange, divided differences, error</td></tr><tr><td>1:35–2:10</td><td>Sections 08–09 — Differentiation and Richardson</td></tr><tr><td>2:10–2:55</td><td>Sections 10–11 — Integration (do one by hand!)</td></tr><tr><td>2:55–3:35</td><td>Sections 12–15 — ODEs (do one RK4 step by hand!)</td></tr><tr><td>3:35–4:00</td><td>Sections 17–18 — Formula sheet + Last-minute sheet</td></tr></tbody></table></div>
+
+<div class="box box--exam"><span class="box__label">Exam alert</span><p>The MTH603 final is <b>mostly MCQs</b>. Across the circulating past-paper collections, the same handful of question types come back every semester:</p>
+<ul>
+<li>Operator identities (<code>Δ = E − 1</code>, <code>δ = E^½ − E^−½</code>)</li>
+<li>"How many intervals?" for Simpson's rules</li>
+<li>Which formula was derived from which</li>
+<li>The four <code>k</code> values in Runge–Kutta</li>
+</ul>
+<p>So <b>memorising formulas exactly beats deep understanding</b> if you are short on time. This guide is weighted that way.</p></div>
+
+<h3>Features you should use</h3>
+<ul>
+<li><b>Search box</b> at the top — type "Simpson" or "k2" to jump straight there.</li>
+<li><b>Aa button</b> — makes text bigger for phone reading.</li>
+<li><b>☾ button</b> — dark mode for late-night study.</li>
+<li><b>Mark studied</b> at the end of each section — the progress bar tracks you.</li>
+<li><b>Contents button</b> at the bottom — jump anywhere.</li>
+</ul>
+<div class="box box--tip"><span class="box__label">Memory trick</span><p>Your progress and settings are saved on this device. Close the page and come back — you will not lose your place.</p></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="basics">
+  <summary class="sec__head">
+    <span class="sec__num">01</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Maths basics you need before anything else</span>
+      <span class="sec__meta"><span class="pill pill--must">Must know</span><span class="pill pill--low">Foundations</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--plain"><span class="box__label">In plain words</span><p>You said maths is hard for you. Fine — this section fixes that. Numerical Analysis looks terrifying because of its <b>symbols</b>, not because the ideas are hard. Learn these ten symbols and 80% of the fear disappears.</p></div>
+
+<h3>1. Subscripts — the little numbers below</h3>
+<p><code>y₀, y₁, y₂, y₃</code> just means <b>first value, second value, third value, fourth value</b>. Nothing more.</p>
+<p>If a table gives you <code>y = 2, 5, 10, 22</code> then <code>y₀ = 2</code>, <code>y₁ = 5</code>, <code>y₂ = 10</code>, <code>y₃ = 22</code>.</p>
+<div class="box box--tip"><span class="box__label">Memory trick</span><p>Read <code>y₀</code> out loud as <b>“y-zero”</b> or <b>“the first y”</b>. Read <code>yₙ</code> as <b>“the last y”</b>. That is all n ever means in this course: <b>the last one</b>.</p></div>
+
+<h3>2. h — the step size</h3>
+<p><code>h</code> is the <b>gap between two x-values</b>. If your table has x = 1, 2, 3, 4 then <code>h = 1</code>. If x = 0.1, 0.2, 0.3 then <code>h = 0.1</code>.</p>
+<div class="slip"><span class="slip__tab">Step size</span><div class="slip__body">h = (any x) − (the x before it)<br>h = (b − a) / n &nbsp;&nbsp;<span style='opacity:.6'>← when integrating from a to b with n strips</span></div></div>
+
+<h3>3. Δ, ∇, δ — the three difference symbols</h3>
+<p>These are just <b>subtraction with a direction</b>. That is genuinely all they are.</p>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Symbol</th><th>Name</th><th>Means</th><th>Example with y = 2, 5, 10</th></tr></thead><tbody><tr><td>Δ</td><td>delta (forward)</td><td>next − current</td><td>Δy₀ = 5 − 2 = 3</td></tr><tr><td>∇</td><td>nabla (backward)</td><td>current − previous</td><td>∇y₂ = 10 − 5 = 5</td></tr><tr><td>δ</td><td>small delta (central)</td><td>half ahead − half behind</td><td>looks both ways</td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+<div class="box box--tip"><span class="box__label">Memory trick</span><p><b>Δ points forward, ∇ points backward.</b> Look at the shapes: Δ is a triangle sitting up (going up/forward), ∇ is upside down (going back). That is how you keep them straight under exam pressure.</p></div>
+
+<h3>4. E — the shift operator</h3>
+<p><code>E</code> means <b>“move one step to the right”</b>.</p>
+<p><code>E f(x) = f(x + h)</code> — you gave it x, it hands you back the <i>next</i> value.</p>
+<p><code>E² </code> means move two steps. <code>E⁻¹</code> means move <i>backwards</i> one step.</p>
+
+<h3>5. The ! symbol — factorial</h3>
+<p><code>n!</code> means multiply every whole number from 1 up to n.</p>
+<div class="slip"><span class="slip__tab">Factorials you will actually use</span><div class="slip__body">2! = 2 × 1 = <b>2</b><br>3! = 3 × 2 × 1 = <b>6</b><br>4! = 4 × 3 × 2 × 1 = <b>24</b><br>5! = <b>120</b></div></div>
+<div class="box box--trap"><span class="box__label">Common mistake</span><p>You will see <code>p(p−1)/2!</code>. That just means <b>divide by 2</b>. And <code>p(p−1)(p−2)/3!</code> means <b>divide by 6</b>. Write the number, not the exclamation mark, when you calculate.</p></div>
+
+<h3>6. Σ — sum everything up</h3>
+<p><code>Σ</code> (sigma) means <b>“add all of these together”</b>. When you see <code>Σ Lₖ(x)yₖ</code>, it means: work out each piece, then add them.</p>
+
+<h3>7. What a derivative actually is</h3>
+<div class="box box--plain"><span class="box__label">In plain words</span><p>A derivative <code>y′</code> (say: "y-prime") is just the <b>steepness</b> of a curve — how fast the value is climbing or falling at that exact point.</p>
+<p>Driving a car: your <b>position</b> is y. Your <b>speed</b> is y′. Your <b>acceleration</b> is y″.</p>
+<p>In this course you almost never differentiate by hand. You just <b>plug table numbers into a formula</b> that estimates the steepness. That is what "numerical differentiation" means.</p></div>
+
+<h3>8. What an integral actually is</h3>
+<div class="box box--plain"><span class="box__label">In plain words</span><p>An integral <code>∫</code> is the <b>area underneath a curve</b>.</p>
+<p>Imagine the curve drawn on graph paper. Colour in everything between the curve and the bottom axis. That coloured area is the integral.</p>
+<p>"Numerical integration" = <b>chopping that area into strips and adding the strips up</b>. Trapezoidal rule uses strips with slanted tops. Simpson's rule uses strips with curved tops. That is the entire chapter.</p></div>
+
+<h3>9. What an ODE and an "initial value problem" are</h3>
+<div class="box box--plain"><span class="box__label">In plain words</span><p>You are told the <b>steepness rule</b> (for example <code>dy/dx = x + y</code>) and <b>one starting point</b> (for example <code>y(0) = 1</code>). You must work out where the curve goes next.</p>
+<p>It is like being told "you are at kilometre 0, and your speed at any moment equals your position plus the time" — and being asked where you are after 0.1 hours. You cannot jump there; you <b>step forward a little at a time</b>. Every ODE method in this course is a different rule for taking that step.</p></div>
+
+<h3>10. ξ — the mystery point in error formulas</h3>
+<p><code>ξ</code> (say: "xi") appears in every error formula. It means <b>“some unknown point somewhere inside the interval”</b>. You never calculate it. You just write it down.</p>
+
+<div class="box box--exam"><span class="box__label">Exam alert</span><p><b>Two rules that cost students marks every single semester:</b></p>
+<ol>
+<li>All trigonometry in this course is in <b>RADIANS</b>, never degrees. Check your calculator mode before you start.</li>
+<li>Number of intervals <code>n</code> = <b>(number of points) − 1</b>. Five values in a table means <b>four</b> intervals, not five.</li>
+</ol></div>
+
+<h3>Quick check</h3>
+<div class="q"><p class="q__stem">If a table gives x = 0.2, 0.4, 0.6, 0.8, what is h?</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>0.2</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>0.4</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>4</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>0.8</span></button></li></ul><div class="q__why"><b>h = 0.2.</b> The gap between any x and the one before it: 0.4 − 0.2 = 0.2. Same gap all the way, so the data is equally spaced.</div></div>
+<div class="q"><p class="q__stem">A table has 7 values. How many intervals n is that?</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>7</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>6</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>8</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>3.5</span></button></li></ul><div class="q__why"><b>n = 6.</b> Intervals = points − 1. This matters enormously for Simpson's rules, which restrict what n is allowed to be.</div></div>
+<div class="q"><p class="q__stem">What does 3! equal?</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>3</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>9</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">C</span><span>6</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>27</span></button></li></ul><div class="q__why"><b>6.</b> 3 × 2 × 1 = 6. You will divide by this constantly in Newton's interpolation formulas.</div></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="operators">
+  <summary class="sec__head">
+    <span class="sec__num">02</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Difference operators & their identities</span>
+      <span class="sec__meta"><span class="pill pill--must">Must know</span><span class="pill pill--low">Lectures 19–20</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--exam"><span class="box__label">Exam alert</span><p><b>This is the highest-scoring section in the entire paper.</b> These identities appear as MCQs in essentially every past paper. If you learn only one section, learn this one.</p></div>
+
+<div class="box box--plain"><span class="box__label">In plain words</span><p>All six "operators" are just <b>instructions written as a single symbol</b>. They are shorthand, like how "+" is shorthand for "add".</p>
+<p>Δ says <i>subtract going forward</i>. ∇ says <i>subtract going backward</i>. E says <i>shift one step right</i>. That is it. The scary-looking identities are just these three instructions rewritten in terms of each other.</p></div>
+
+<h3>The six operators</h3>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Operator</th><th>Symbol</th><th>Definition</th><th>Plain meaning</th></tr></thead><tbody><tr><td>Forward difference</td><td>Δ</td><td>Δyᵢ = yᵢ₊₁ − yᵢ</td><td>next minus current</td></tr><tr><td>Backward difference</td><td>∇</td><td>∇yᵢ = yᵢ − yᵢ₋₁</td><td>current minus previous</td></tr><tr><td>Central difference</td><td>δ</td><td>δyᵢ = yᵢ₊½ − yᵢ₋½</td><td>half ahead minus half behind</td></tr><tr><td>Shift</td><td>E</td><td>E f(x) = f(x+h)</td><td>push forward one step</td></tr><tr><td>Average / mean</td><td>μ</td><td>μf(x) = ½[f(x+h/2) + f(x−h/2)]</td><td>average of half-step neighbours</td></tr><tr><td>Differential</td><td>D</td><td>Df(x) = f′(x)</td><td>ordinary derivative</td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+
+<h4>Extra shift-operator facts that get asked directly</h4>
+<div class="slip"><span class="slip__tab">Shift operator</span><div class="slip__body">E f(x) = f(x + h)<br>E² f(x) = f(x + 2h)<br><b>Eⁿ f(x) = f(x + nh)</b><br>E⁻¹ f(x) = f(x − h)<br>E⁻ⁿ f(x) = f(x − nh)<br><br>Ey₀ = y₁ &nbsp; E²y₀ = y₂ &nbsp; E²y₂ = y₄</div></div>
+
+<h3>⭐ The identities — memorise these exactly</h3>
+<div class="slip slip--key"><span class="slip__tab">The identity sheet</span><div class="slip__body"><b>Δ = E − 1</b> &nbsp;&nbsp;⟺&nbsp;&nbsp; E = 1 + Δ<br>
+<b>∇ = 1 − E⁻¹</b> = (E − 1)/E<br>
+<b>δ = E^½ − E^−½</b><br>
+<b>μ = ½(E^½ + E^−½)</b><br>
+<b>E = e^(hD)</b> &nbsp;&nbsp;⟺&nbsp;&nbsp; hD = log E<br>
+<b>hD = log(1 + Δ) = −log(1 − ∇)</b><br><br>
+<b>Δ − ∇ = Δ∇ = ∇Δ = δ²</b><br>
+<b>μ² = 1 + δ²/4</b><br>
+<b>E^½ = μ + δ/2</b><br>
+Δ = E∇ = ∇E = δE^½<br>
+∇ = ΔE⁻¹</div></div>
+
+<div class="box box--tip"><span class="box__label">Memory trick</span><p><b>The one strategy that solves every operator proof:</b> turn <i>everything</i> into E, simplify with ordinary algebra, then turn it back.</p>
+<p>You do not need clever tricks. Every single proof in this topic is that one move.</p></div>
+
+<h3>Worked proof — Prove that Δ − ∇ = δ²</h3>
+<div class="steps"><div class="steps__head">Follow it line by line<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Write both sides using E only</b><p>Replace Δ and ∇ with their E-forms from the identity sheet.</p><span class="math">Δ = E − 1 &nbsp;&nbsp;and&nbsp;&nbsp; ∇ = 1 − E⁻¹</span></li><li><b>Step 2 — Subtract them</b><p>Just remove the brackets carefully. Watch the double minus.</p><span class="math">Δ − ∇ = (E − 1) − (1 − E⁻¹)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= E − 1 − 1 + E⁻¹<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= E − 2 + E⁻¹</span></li><li><b>Step 3 — Now expand δ² separately</b><p>δ = E^½ − E^−½, so square it like any bracket: (a − b)² = a² − 2ab + b².</p><span class="math">δ² = (E^½ − E^−½)²<br>&nbsp;&nbsp;&nbsp;= E − 2(E^½)(E^−½) + E⁻¹<br>&nbsp;&nbsp;&nbsp;= E − 2 + E⁻¹</span></li><li><b>Step 4 — Compare</b><p>Both sides came out identical. Proof complete.</p><span class="math">Δ − ∇ = E − 2 + E⁻¹ = δ² &nbsp;&nbsp;✔</span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<h3>Worked proof — Prove that μ² = 1 + δ²/4</h3>
+<div class="steps"><div class="steps__head">Follow it line by line<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Square μ</b><p>μ = ½(E^½ + E^−½). Square the bracket: (a + b)² = a² + 2ab + b².</p><span class="math">μ² = ¼(E^½ + E^−½)² = ¼(E + 2 + E⁻¹)</span></li><li><b>Step 2 — Work out δ²/4</b><p>We already know δ² = E − 2 + E⁻¹ from the previous proof.</p><span class="math">δ²/4 = ¼(E − 2 + E⁻¹)</span></li><li><b>Step 3 — Add 1 to it</b><p>Write the 1 as 4/4 so you can combine the fractions.</p><span class="math">1 + δ²/4 = ¼(4 + E − 2 + E⁻¹) = ¼(E + 2 + E⁻¹)</span></li><li><b>Step 4 — Compare</b><p>Identical to Step 1.</p><span class="math">μ² = ¼(E + 2 + E⁻¹) = 1 + δ²/4 &nbsp;&nbsp;✔</span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<h3>Where E = e^(hD) comes from</h3>
+<div class="steps"><div class="steps__head">The derivation examiners like<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Start with what E does</b><p>E shifts forward by h.</p><span class="math">Ey_x = y_(x+h) = f(x + h)</span></li><li><b>Step 2 — Expand f(x+h) by Taylor's series</b><p>Standard Taylor expansion around x.</p><span class="math">f(x+h) = f(x) + h f′(x) + (h²/2!) f″(x) + …</span></li><li><b>Step 3 — Rewrite derivatives using D</b><p>f′ = Df, f″ = D²f, and so on.</p><span class="math">= f(x) + hD f(x) + (h²/2!) D²f(x) + …</span></li><li><b>Step 4 — Recognise the exponential series</b><p>1 + z + z²/2! + z³/3! + … is exactly e^z, with z = hD.</p><span class="math">= [1 + hD + (hD)²/2! + …] f(x) = e^(hD) f(x)</span></li><li><b>Step 5 — Conclude</b><p>Take logs of both sides for the second form.</p><span class="math"><b>E = e^(hD)</b> &nbsp;&nbsp;and&nbsp;&nbsp; <b>hD = log E</b> ✔</span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<h3>Building a difference table</h3>
+<div class="box box--plain"><span class="box__label">In plain words</span><p>A difference table is just a triangle of subtractions. Write the numbers in a column, subtract each pair to make the next column, keep going until you run out.</p>
+<p><b>Always subtract lower minus upper.</b> Go down the column, never up.</p></div>
+
+<p>Example with x = 1, 2, 3, 4, 5 and y = 2, 5, 10, 22, 39:</p>
+<div class="tablewrap"><table><thead><tr><th>x</th><th>y</th><th>Δy</th><th>Δ²y</th><th>Δ³y</th><th>Δ⁴y</th></tr></thead><tbody><tr><td>1</td><td>2</td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td>3</td><td></td><td></td><td></td></tr><tr><td>2</td><td>5</td><td></td><td>2</td><td></td><td></td></tr><tr><td></td><td></td><td>5</td><td></td><td>5</td><td></td></tr><tr><td>3</td><td>10</td><td></td><td>7</td><td></td><td>−7</td></tr><tr><td></td><td></td><td>12</td><td></td><td>−2</td><td></td></tr><tr><td>4</td><td>22</td><td></td><td>5</td><td></td><td></td></tr><tr><td></td><td></td><td>17</td><td></td><td></td><td></td></tr><tr><td>5</td><td>39</td><td></td><td></td><td></td><td></td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+<p><b>How each column forms:</b> Δy: 5−2=3, 10−5=5, 22−10=12, 39−22=17 → Δ²y: 5−3=2, 12−5=7, 17−12=5 → Δ³y: 7−2=5, 5−7=−2 → Δ⁴y: −2−5=−7.</p>
+
+<div class="box box--tip"><span class="box__label">Memory trick</span><p><b>Never build two tables.</b> The forward, backward and central tables contain the <i>exact same numbers</i> — only the labels differ.</p>
+<p>Build one table. For a forward question read the <b>top diagonal</b>. For a backward question read the <b>bottom row</b>. This saves you five minutes in the exam.</p></div>
+
+<h3>Properties that get asked</h3>
+<ol>
+<li>For a polynomial of <b>degree n</b>, the <b>nth differences are constant</b> and the <b>(n+1)th are zero</b>.</li>
+<li>Difference operators need <b>equally spaced</b> data. Lagrange and divided differences do not.</li>
+<li>Δ, ∇, δ, E, μ are all <b>linear</b> operators.</li>
+<li>Δ of a constant = <b>0</b>.</li>
+<li>With n+1 data points, the highest difference you can compute is <b>Δⁿ</b>.</li>
+<li>"Central difference gives a better approximation but requires more computation" → <b>TRUE</b>.</li>
+</ol>
+
+<div class="box box--trap"><span class="box__label">Common mistake</span><p>Subtracting in the wrong direction. For Δ it is <b>always lower minus upper</b>. Students under time pressure flip this and lose every mark in the table.</p></div>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">Symbol used for forward differences is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>∇</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>Δ</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>δ</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>μ</span></button></li></ul><div class="q__why"><b>Δ</b> is forward, <b>∇</b> is backward, <b>δ</b> is central. This exact question appears in the Spring 2010 paper and has repeated ever since.</div></div>
+<div class="q"><p class="q__stem">The relationship between the central difference operator and the shift operator is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>δ = E − 1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>δ = 1 − E⁻¹</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">C</span><span>δ = E^½ − E^−½</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>δ = ½(E^½ + E^−½)</span></button></li></ul><div class="q__why"><b>δ = E^½ − E^−½.</b> Option A is Δ, option B is ∇, option D is μ. All three wrong options are the <i>other</i> operators — this is a deliberate trap and it repeats every semester.</div></div>
+<div class="q"><p class="q__stem">Δ equals:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>E − 1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>1 − E</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>E + 1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>1/E</span></button></li></ul><div class="q__why"><b>E − 1.</b> Option B is a sign flip and is the most commonly chosen wrong answer when rushing. Δy = Ey − y = (E−1)y.</div></div>
+<div class="q"><p class="q__stem">The average operator μ is defined as:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>E^½ − E^−½</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>½(E^½ + E^−½)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>E^½ + E^−½</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>½(E − E⁻¹)</span></button></li></ul><div class="q__why"><b>½(E^½ + E^−½).</b> Option C forgets the ½ — that is the trap. An <i>average</i> must divide by 2.</div></div>
+<div class="q"><p class="q__stem">Eⁿ f(x) equals:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>f(x + h)</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>f(x + nh)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>f(nx)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>n f(x + h)</span></button></li></ul><div class="q__why"><b>f(x + nh).</b> Applying the shift n times moves you n steps, and each step is h wide.</div></div>
+<div class="q"><p class="q__stem">Δ∇ equals:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>Δ + ∇</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>δ²</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>μ²</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>E</span></button></li></ul><div class="q__why"><b>δ².</b> Neat double fact worth remembering: <i>both</i> Δ∇ and Δ−∇ equal δ².</div></div>
+<div class="q"><p class="q__stem">μ² equals:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>1 + δ²</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>1 + δ²/4</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>1 − δ²/4</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>δ²/4</span></button></li></ul><div class="q__why"><b>1 + δ²/4.</b> Option A forgets the 4. The 4 comes from squaring the ½ in the definition of μ.</div></div>
+<div class="q"><p class="q__stem">If the third differences of a tabulated function are constant, the data represents a polynomial of degree:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>2</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>3</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>4</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>1</span></button></li></ul><div class="q__why"><b>3.</b> The rule is: degree n polynomial → nth differences constant. Constant Δ³ means degree 3.</div></div>
+<div class="q"><p class="q__stem">The inverse shift operator E⁻¹ f(x) equals:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>f(x + h)</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>f(x − h)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>1/f(x+h)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>f(x)/h</span></button></li></ul><div class="q__why"><b>f(x − h).</b> The inverse shift moves <i>backwards</i> one step. It is not a reciprocal.</div></div>
+
+<h3>Likely subjective question</h3>
+<div class="box box--tip"><span class="box__label">Expect this</span><p><b>“Define shift operator, average operator and differential operator.”</b> — from your practice bank, and a near-certain 3-mark question.</p>
+<p><b>Model answer:</b></p>
+<p><b>Shift operator E:</b> E f(x) = f(x+h). It shifts the function forward by one step h. In general Eⁿf(x) = f(x+nh), and E⁻¹f(x) = f(x−h).</p>
+<p><b>Average (mean) operator μ:</b> μ f(x) = ½[f(x + h/2) + f(x − h/2)]. It gives the mean of the function values half a step either side.</p>
+<p><b>Differential operator D:</b> D f(x) = f′(x) = dy/dx, and D²f(x) = f″(x). It relates to E by E = e^(hD).</p></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="newton-forward">
+  <summary class="sec__head">
+    <span class="sec__num">03</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Newton's forward difference formula</span>
+      <span class="sec__meta"><span class="pill pill--high">High yield</span><span class="pill pill--low">Lecture 21</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--plain"><span class="box__label">In plain words</span><p>You have a table of values, and you need a value that is <b>not in the table</b> — something in between. That is interpolation.</p>
+<p>Newton's forward formula builds an estimate by starting at the <b>first</b> value and adding correction terms: first the change, then the change-in-the-change, and so on. Each extra term makes the estimate more accurate.</p>
+<p>Use it when the value you want is near the <b>top</b> of the table.</p></div>
+
+<div class="slip slip--key"><span class="slip__tab">Newton's forward difference formula</span><div class="slip__body">f(x₀ + ph) = y₀ + p·Δy₀
+&nbsp;&nbsp;&nbsp;&nbsp;+ [p(p−1)/2!]·Δ²y₀
+&nbsp;&nbsp;&nbsp;&nbsp;+ [p(p−1)(p−2)/3!]·Δ³y₀
+&nbsp;&nbsp;&nbsp;&nbsp;+ …
+
+where &nbsp; <b>p = (x − x₀) / h</b></div></div>
+
+<dl class="decoder"><dt>x₀</dt><dd>the <b>first</b> x-value in the table</dd><dt>h</dt><dd>the gap between x-values</dd><dt>x</dt><dd>the point you want the answer at</dd><dt>p</dt><dd>how many steps x is away from x₀ — no units, just a number</dd><dt>Δᵏy₀</dt><dd>the kth forward difference, taken from the <b>top diagonal</b> of your table</dd></dl>
+
+<h4>Where it comes from (one line)</h4>
+<p>f(x₀ + ph) = E^p y₀ = (1 + Δ)^p y₀, then binomial-expand (1+Δ)^p. Write that line if a derivation is asked.</p>
+
+<h3>Worked example — estimate f(0.36)</h3>
+<div class="tablewrap"><table><thead><tr><th>x</th><th>0.1</th><th>0.2</th><th>0.3</th><th>0.4</th></tr></thead><tbody><tr><td>y</td><td>0.1003</td><td>0.2027</td><td>0.3093</td><td>0.4228</td></tr></tbody></table></div>
+<div class="steps"><div class="steps__head">Estimate f(0.36)<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Build the difference table</b><p>Subtract downwards to get each column.</p><span class="math">Δy:&nbsp; 0.1024, &nbsp;0.1066, &nbsp;0.1135<br>Δ²y: 0.0042, &nbsp;0.0069<br>Δ³y: 0.0027</span></li><li><b>Step 2 — Pick out the top diagonal</b><p>Newton forward only uses the <b>first</b> entry of each column.</p><span class="math">y₀ = 0.1003 &nbsp; Δy₀ = 0.1024 &nbsp; Δ²y₀ = 0.0042 &nbsp; Δ³y₀ = 0.0027</span></li><li><b>Step 3 — Find p</b><p>h = 0.1 (gap between x values), x₀ = 0.1 (first x), x = 0.36 (what we want).</p><span class="math">p = (0.36 − 0.1) / 0.1 = 0.26 / 0.1 = <b>2.6</b></span></li><li><b>Step 4 — Substitute into the formula</b><p>Work out each bracket separately before multiplying. Do not rush this line.</p><span class="math">f = 0.1003 + 2.6(0.1024)<br>&nbsp;&nbsp;&nbsp;+ [2.6(1.6)/2](0.0042)<br>&nbsp;&nbsp;&nbsp;+ [2.6(1.6)(0.6)/6](0.0027)</span></li><li><b>Step 5 — Compute each term</b><p>Four numbers to add.</p><span class="math">= 0.1003 + 0.26624 + 0.008736 + 0.0011232</span></li><li><b>Step 6 — Add them up</b><p>That is your answer.</p><span class="math"><b>f(0.36) ≈ 0.37640</b></span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<div class="box box--trap"><span class="box__label">Common mistake</span><ol>
+<li>Using xₙ instead of x₀ when finding p. <b>Forward always uses x₀.</b></li>
+<li>Writing p(p+1) instead of p(p−1). <b>Forward has MINUS.</b></li>
+<li>Reading differences off the wrong diagonal — forward uses the <b>top</b> only.</li>
+<li>Forgetting the factorials 2!, 3!, 4! underneath.</li>
+</ol></div>
+
+<div class="box box--tip"><span class="box__label">Memory trick</span><p><b>F</b>orward → <b>F</b>irst point (x₀) → the <b>F</b>alling factor <b>(p−1)</b>. Three F's, one rule.</p></div>
+
+<h3>Facts that appear as MCQs</h3>
+<ul>
+<li>If you keep <b>r+1 terms</b>, you get a polynomial of <b>degree r</b>.</li>
+<li>Requires <b>equally spaced</b> x-values.</li>
+<li>Setting p = 0 gives back y₀ exactly.</li>
+<li>Can be used to <b>find a missing value</b>: set the highest available difference to zero and solve.</li>
+</ul>
+
+<h4>Missing-value technique</h4>
+<p>With 5 points and one missing, assume degree 3, so set <b>Δ⁴y₀ = 0</b>:</p>
+<div class="slip"><span class="slip__tab">Missing value</span><div class="slip__body">Δ⁴y₀ = 0 &nbsp;⟹&nbsp; y₄ − 4y₃ + 6y₂ − 4y₁ + y₀ = 0<br><br>Then solve for the unknown y.</div></div>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">In Newton's forward difference formula, p is defined as:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>(x − x₀)/h</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>(x − xₙ)/h</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>(x₀ − x)/h</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>(x − x₀)h</span></button></li></ul><div class="q__why"><b>(x − x₀)/h.</b> Option B is the <i>backward</i> definition — VU pairs these two constantly to catch you out.</div></div>
+<div class="q"><p class="q__stem">If we retain r+1 terms in Newton's forward difference formula, we obtain a polynomial of degree:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>r+1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>r+2</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">C</span><span>r</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>r−1</span></button></li></ul><div class="q__why"><b>r.</b> Keeping r+1 terms gives degree r. Verbatim past-paper item.</div></div>
+<div class="q"><p class="q__stem">In Newton's forward formula, the coefficient of Δ²y₀ is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>p(p+1)/2!</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>p(p−1)/2!</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>p²/2!</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>(p−1)(p−2)/2!</span></button></li></ul><div class="q__why"><b>p(p−1)/2!</b> — forward uses <b>minus</b>. Option A is the backward version.</div></div>
+<div class="q"><p class="q__stem">Newton's forward difference formula is best used to interpolate near the ___ of the table.</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>beginning</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>end</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>middle</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>anywhere equally</span></button></li></ul><div class="q__why"><b>Beginning.</b> It builds outward from y₀, so accuracy is best when p is small and positive.</div></div>
+
+<h3>Likely subjective questions</h3>
+<div class="box box--tip"><span class="box__label">Expect this</span><p><b>“Find p if f(18) is calculated from a table with x = 1,2,3,4,5.”</b><br>
+h = 1, x₀ = 1 → <b>p = (18 − 1)/1 = 17</b>. <i>Add for the extra mark:</i> such a large p means this is extrapolation, not interpolation.</p>
+<p><b>“Find p if f(0.39) is calculated from x = 0.4, 0.5, 0.6, 0.7, 0.8.”</b><br>
+h = 0.1, x₀ = 0.4 → <b>p = (0.39 − 0.4)/0.1 = −0.1</b></p>
+<p><b>“Find the interpolating polynomial”</b> given y₀=1, Δy₀=2, Δ²y₀=3, Δ³y₀=0, h=1, x₀=0:<br>
+p = x, so f(x) = 1 + 2x + [x(x−1)/2](3) = 1 + 2x + 1.5x² − 1.5x = <b>1.5x² + 0.5x + 1</b></p></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="newton-backward">
+  <summary class="sec__head">
+    <span class="sec__num">04</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Newton's backward difference formula</span>
+      <span class="sec__meta"><span class="pill pill--high">High yield</span><span class="pill pill--low">Lecture 22</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--plain"><span class="box__label">In plain words</span><p>Exactly the same idea as the forward formula — but you start from the <b>last</b> value in the table and work backwards.</p>
+<p>Use it when the value you want is near the <b>bottom</b> of the table.</p></div>
+
+<div class="slip slip--key"><span class="slip__tab">Newton's backward difference formula</span><div class="slip__body">f(xₙ + ph) = yₙ + p·∇yₙ
+&nbsp;&nbsp;&nbsp;&nbsp;+ [p(p+1)/2!]·∇²yₙ
+&nbsp;&nbsp;&nbsp;&nbsp;+ [p(p+1)(p+2)/3!]·∇³yₙ
+&nbsp;&nbsp;&nbsp;&nbsp;+ …
+
+where &nbsp; <b>p = (x − xₙ) / h</b></div></div>
+
+<dl class="decoder"><dt>xₙ</dt><dd>the <b>last</b> x-value in the table</dd><dt>∇ᵏyₙ</dt><dd>the kth backward difference, taken from the <b>bottom row</b></dd><dt>p</dt><dd>usually <b>negative</b>, because x is smaller than xₙ</dd></dl>
+
+<h3>⭐ Forward vs Backward — the comparison that gets tested</h3>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Feature</th><th>Forward</th><th>Backward</th></tr></thead><tbody><tr><td>Base point</td><td>x₀ (first)</td><td>xₙ (last)</td></tr><tr><td>p =</td><td>(x − x₀)/h</td><td>(x − xₙ)/h</td></tr><tr><td>Sign of p</td><td>usually positive</td><td>usually <b>negative</b></td></tr><tr><td>Factor pattern</td><td>p(p<b>−</b>1)(p<b>−</b>2)…</td><td>p(p<b>+</b>1)(p<b>+</b>2)…</td></tr><tr><td>Differences</td><td>Δ, <b>top</b> diagonal</td><td>∇, <b>bottom</b> row</td></tr><tr><td>Best for</td><td>start of table</td><td>end of table</td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+
+<div class="box box--tip"><span class="box__label">Memory trick</span><p><b>B</b>ackward → <b>B</b>ottom → <b>B</b>igger factors <b>(p+1)</b>. Forward → First → <b>(p−1)</b>.</p></div>
+
+<h3>Worked example — compute f(11)</h3>
+<div class="tablewrap"><table><thead><tr><th>x</th><th>2</th><th>4</th><th>6</th><th>8</th><th>10</th><th>12</th><th>14</th></tr></thead><tbody><tr><td>F(x)</td><td>23</td><td>93</td><td>259</td><td>559</td><td>1031</td><td>1713</td><td>2643</td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+<p>Use xₙ = 10 and p = 0.5 (so the table is truncated at x = 10, h = 2).</p>
+<div class="steps"><div class="steps__head">Compute f(11)<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Build differences up to x = 10</b><p>Subtract downwards as usual.</p><span class="math">Δ: 70, 166, 300, 472<br>Δ²: 96, 134, 172<br>Δ³: 38, 38<br>Δ⁴: 0</span></li><li><b>Step 2 — Read the BOTTOM row (these are the ∇ values at xₙ = 10)</b><p>The last entry of each column is what backward needs.</p><span class="math">∇y = 472 &nbsp; ∇²y = 172 &nbsp; ∇³y = 38 &nbsp; ∇⁴y = 0</span></li><li><b>Step 3 — Confirm p</b><p>h = 2, xₙ = 10, x = 11.</p><span class="math">p = (11 − 10)/2 = <b>0.5</b></span></li><li><b>Step 4 — Substitute, using the PLUS pattern</b><p>Backward brackets are (p+1), (p+2) — note the difference from forward.</p><span class="math">f = 1031 + 0.5(472)<br>&nbsp;&nbsp;&nbsp;+ [0.5(1.5)/2](172)<br>&nbsp;&nbsp;&nbsp;+ [0.5(1.5)(2.5)/6](38)</span></li><li><b>Step 5 — Compute each term</b><p>The Δ⁴ term is zero, so it drops out.</p><span class="math">= 1031 + 236 + 64.5 + 11.875</span></li><li><b>Step 6 — Add up</b><p>Final answer.</p><span class="math"><b>f(11) = 1343.375</b></span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<div class="box box--trap"><span class="box__label">Common mistake</span><ol>
+<li>Using <b>Δ</b> values with the backward formula. Use ∇ from the <b>bottom row</b>.</li>
+<li>Writing (p−1) instead of (p+1).</li>
+<li>Forgetting that p is <b>negative</b> when x &lt; xₙ, then losing the sign mid-calculation.</li>
+<li>Using x₀ as the base. Backward <b>always</b> uses xₙ.</li>
+</ol></div>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">In Newton's backward difference formula, p =</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>(x − x₀)/h</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>(x − xₙ)/h</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>(xₙ − x)/h</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>(x − xₙ)h</span></button></li></ul><div class="q__why"><b>(x − xₙ)/h.</b> Backward measures from the <b>last</b> point. Option A is the forward version.</div></div>
+<div class="q"><p class="q__stem">In Newton's backward formula, the coefficient of ∇²yₙ is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>p(p−1)/2!</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>p(p+1)/2!</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>p²/2</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>(p+1)(p+2)/2!</span></button></li></ul><div class="q__why"><b>p(p+1)/2!</b> — backward uses <b>plus</b>. This plus/minus pairing is the single most tested distinction between the two formulas.</div></div>
+<div class="q"><p class="q__stem">In Newton's backward formula, the differences are taken along the ___ diagonal.</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>top</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>bottom</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>middle</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>any</span></button></li></ul><div class="q__why"><b>Bottom.</b> Build one table, then read the bottom row for backward questions.</div></div>
+
+<h3>Likely subjective questions</h3>
+<div class="box box--tip"><span class="box__label">Expect this</span><p><b>“Construct a backward difference table for x = 1, 3, 5 and y = 2, 4, 7.”</b></p>
+<p>∇y: 4−2 = 2, then 7−4 = 3. ∇²y: 3−2 = 1. So at x = 5: <b>∇y₅ = 3, ∇²y₅ = 1</b>. (h = 2, equally spaced ✔)</p>
+<p><b>“Construct a backward difference table for x = 1, 5, 10 and y = 3, 7, 14.”</b></p>
+<p>∇y: 4, 7. ∇²y: 3.</p>
+<p><b>⚠ Worth an extra mark here:</b> the spacing is <b>not</b> equal (4 then 5). You can build the table mechanically, but you should note that difference formulas strictly require equal spacing — <b>Newton's divided difference</b> is the correct method for this data. Examiners like that observation.</p></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="lagrange">
+  <summary class="sec__head">
+    <span class="sec__num">05</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Lagrange's interpolation formula</span>
+      <span class="sec__meta"><span class="pill pill--mid">Worth knowing</span><span class="pill pill--low">Lecture 23</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--plain"><span class="box__label">In plain words</span><p>Newton's formulas break if your x-values are <b>not evenly spaced</b>. Lagrange's formula does not care about spacing at all — that is its whole reason for existing.</p>
+<p>The idea: build one "weight" for each data point. Each weight equals 1 at its own point and 0 at every other point. Multiply each weight by its y-value, add them all up, and you have a curve that passes through every point exactly.</p></div>
+
+<div class="slip slip--key"><span class="slip__tab">Lagrange's formula</span><div class="slip__body">f(x) = Σ Lₖ(x) · yₖ
+
+where
+
+Lₖ(x) = <b>numerator:</b> every (x − xᵢ) <b>except</b> i = k
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;———————————————————
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>denominator:</b> the same product with x replaced by xₖ</div></div>
+
+<h4>Written out for 3 points — the case VU usually sets</h4>
+<div class="slip"><span class="slip__tab">Three-point Lagrange</span><div class="slip__body">f(x) = (x−x₁)(x−x₂) / [(x₀−x₁)(x₀−x₂)] · y₀
+&nbsp;&nbsp;&nbsp;&nbsp;+ (x−x₀)(x−x₂) / [(x₁−x₀)(x₁−x₂)] · y₁
+&nbsp;&nbsp;&nbsp;&nbsp;+ (x−x₀)(x−x₁) / [(x₂−x₀)(x₂−x₁)] · y₂</div></div>
+
+<h3>Key properties</h3>
+<ol>
+<li><b>No equal spacing required</b> — the whole selling point.</li>
+<li><b>Σ Lₖ(x) = 1</b> for every x. Excellent self-check: add your coefficients, they must total 1.</li>
+<li>Lₖ(xₖ) = 1 and Lₖ(xᵢ) = 0 for i ≠ k.</li>
+<li>With n+1 points it gives a polynomial of degree <b>≤ n</b>.</li>
+<li><b>Main disadvantage:</b> add one new data point and you must <b>recompute everything from scratch</b>. Newton's divided difference does not have this problem.</li>
+</ol>
+
+<h3>Worked example — evaluate f(2.5)</h3>
+<p>Given x = 1, 3, 7 and y = 4, 18, 21.</p>
+<div class="steps"><div class="steps__head">Evaluate f(2.5)<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Label everything</b><p>Write down which value is which before you start. This prevents most errors.</p><span class="math">x₀=1, x₁=3, x₂=7<br>y₀=4, y₁=18, y₂=21<br>x = 2.5</span></li><li><b>Step 2 — First coefficient L₀</b><p>Numerator skips (x−x₀). Denominator is the same brackets with x₀ = 1 put in.</p><span class="math">L₀ = (2.5−3)(2.5−7) / [(1−3)(1−7)]<br>&nbsp;&nbsp;&nbsp;= (−0.5)(−4.5) / [(−2)(−6)]<br>&nbsp;&nbsp;&nbsp;= 2.25 / 12 = <b>0.1875</b></span></li><li><b>Step 3 — Second coefficient L₁</b><p>Now skip (x−x₁), and use x₁ = 3 in the denominator.</p><span class="math">L₁ = (2.5−1)(2.5−7) / [(3−1)(3−7)]<br>&nbsp;&nbsp;&nbsp;= (1.5)(−4.5) / [(2)(−4)]<br>&nbsp;&nbsp;&nbsp;= −6.75 / −8 = <b>0.84375</b></span></li><li><b>Step 4 — Third coefficient L₂</b><p>Skip (x−x₂), use x₂ = 7 below.</p><span class="math">L₂ = (2.5−1)(2.5−3) / [(7−1)(7−3)]<br>&nbsp;&nbsp;&nbsp;= (1.5)(−0.5) / [(6)(4)]<br>&nbsp;&nbsp;&nbsp;= −0.75 / 24 = <b>−0.03125</b></span></li><li><b>Step 5 — CHECK before finishing</b><p>The coefficients must add to exactly 1. If they do not, you have made an arithmetic error — go back now.</p><span class="math">0.1875 + 0.84375 − 0.03125 = <b>1.0</b> ✔</span></li><li><b>Step 6 — Multiply each by its y and add</b><p>Final answer.</p><span class="math">f(2.5) = 0.1875(4) + 0.84375(18) − 0.03125(21)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 0.75 + 15.1875 − 0.65625<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = <b>15.28125</b></span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<h3>Inverse interpolation</h3>
+<p>To find <b>x</b> for a given <b>y</b>, just <b>swap the roles of x and y</b> in the formula. This works precisely because Lagrange doesn't need equal spacing — and y-values are almost never equally spaced.</p>
+
+<div class="box box--trap"><span class="box__label">Common mistake</span><ol>
+<li>Including the factor (x − xₖ) in the kth numerator. <b>It must be left out.</b></li>
+<li>Sign errors in denominators — write every bracket out, never do it mentally.</li>
+<li>Forgetting to multiply each Lₖ by its own yₖ.</li>
+<li>Not checking Σ Lₖ = 1. That check is free error detection — use it.</li>
+</ol></div>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">The sum of the Lagrange coefficients Lₖ(x) is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>0</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>n</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>n+1</span></button></li></ul><div class="q__why"><b>1.</b> Always, for every x. Use it as a checksum in the exam.</div></div>
+<div class="q"><p class="q__stem">Lagrange's formula with n+1 points produces a polynomial of degree at most:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>n+1</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>n</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>n−1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>2n</span></button></li></ul><div class="q__why"><b>n.</b> Two points give a line (degree 1), three give a parabola (degree 2), and so on.</div></div>
+<div class="q"><p class="q__stem">The main disadvantage of Lagrange's interpolation is that:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>it needs equal spacing</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>adding a new point requires full recomputation</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>it cannot handle 3 points</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>it needs derivatives</span></button></li></ul><div class="q__why"><b>Adding a point means starting over.</b> Every Lₖ changes, because every denominator gains a new bracket. Newton's divided difference just adds one extra term instead — which is why the handouts prefer it.</div></div>
+
+<h3>Likely subjective question</h3>
+<div class="box box--tip"><span class="box__label">Expect this</span><p><b>“Compare Lagrange's interpolation with Newton's divided difference interpolation.”</b></p>
+<p><b>Model answer:</b> Both handle unequally spaced data and produce the same polynomial. <b>Lagrange</b> is easier to write down directly but must be redone entirely if a data point is added. <b>Newton's divided difference</b> builds up term by term, so a new point only adds one extra term, and it is computationally cheaper — which is why the handouts prefer it.</p>
+<hr style="border:0;border-top:1px solid var(--rule);margin:12px 0">
+<p><b>“Find the interpolating polynomial for (0,7), (2,6), (3,9), (6,21).”</b></p>
+<p>Four points → a cubic. Divided differences are far quicker here:<br>
+1st: −1/2, 3, 4 &nbsp;→&nbsp; 2nd: 7/6, 1/4 &nbsp;→&nbsp; 3rd: <b>−11/72</b><br>
+P(x) = 7 + x(−½) + x(x−2)(7/6) + x(x−2)(x−3)(−11/72)<br>
+Expanded: <b>P(x) = −(11/72)x³ + (139/72)x² − (15/4)x + 7</b><br>
+Check: P(0)=7 ✔ P(2)=6 ✔ P(3)=9 ✔ P(6)=21 ✔</p></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="divided">
+  <summary class="sec__head">
+    <span class="sec__num">06</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Divided differences & Newton's divided difference formula</span>
+      <span class="sec__meta"><span class="pill pill--mid">Worth knowing</span><span class="pill pill--low">Lectures 24–25</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--plain"><span class="box__label">In plain words</span><p>A divided difference is a <b>difference divided by the gap</b>. That is literally the name and the definition.</p>
+<p>Ordinary differences (Δ) assume every gap is the same size, so they don't bother dividing. When gaps are uneven, you must divide by the actual gap — and that gives you divided differences.</p></div>
+
+<div class="slip"><span class="slip__tab">Divided differences</span><div class="slip__body">First order:&nbsp; y[x₀, x₁] = (y₁ − y₀) / (x₁ − x₀)
+
+Second order: y[x₀,x₁,x₂] = (y[x₁,x₂] − y[x₀,x₁]) / (x₂ − x₀)
+
+Third order:&nbsp; y[x₀,x₁,x₂,x₃] = (y[x₁,x₂,x₃] − y[x₀,x₁,x₂]) / (x₃ − x₀)</div></div>
+
+<div class="box box--tip"><span class="box__label">Memory trick</span><p><b>The pattern:</b> take the two divided differences one order below, subtract them, and divide by (<b>outermost x</b> − <b>outermost x</b>). Note the denominator spans <b>all</b> the intervals involved, not just the adjacent gap.</p></div>
+
+<div class="slip slip--key"><span class="slip__tab">Newton's divided difference formula</span><div class="slip__body">f(x) = y[x₀]
+&nbsp;&nbsp;&nbsp;&nbsp;+ (x−x₀)·y[x₀,x₁]
+&nbsp;&nbsp;&nbsp;&nbsp;+ (x−x₀)(x−x₁)·y[x₀,x₁,x₂]
+&nbsp;&nbsp;&nbsp;&nbsp;+ (x−x₀)(x−x₁)(x−x₂)·y[x₀,x₁,x₂,x₃]
+&nbsp;&nbsp;&nbsp;&nbsp;+ …</div></div>
+<p>Only the <b>top diagonal</b> of the table is used — exactly like Newton's forward formula.</p>
+
+<h3>Key properties</h3>
+<ol>
+<li>Works for <b>unequally spaced</b> data — certain MCQ.</li>
+<li>Divided differences are <b>symmetric</b>: y[x₀,x₁] = y[x₁,x₀]. Order does not matter.</li>
+<li>The nth divided difference of a degree-n polynomial is <b>constant</b>; the (n+1)th is <b>zero</b>.</li>
+<li><b>Link to forward differences</b> (equal spacing only): <code>y[x₀,…,xₙ] = Δⁿy₀ / (n! hⁿ)</code>. This is why the divided difference formula <b>reduces to</b> Newton's forward formula when spacing is equal.</li>
+<li>Adding a new data point adds only <b>one new term</b>.</li>
+</ol>
+
+<h3>Worked example — small table</h3>
+<p>x = 0, 1, 3 and y = 2, 4, 20.</p>
+<div class="steps"><div class="steps__head">Build the table and the polynomial<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — First order divided differences</b><p>Difference in y, divided by difference in x.</p><span class="math">y[0,1] = (4 − 2)/(1 − 0) = <b>2</b><br>y[1,3] = (20 − 4)/(3 − 1) = 16/2 = <b>8</b></span></li><li><b>Step 2 — Second order</b><p>Difference of the two first-order values, divided by the <b>full</b> span (3 − 0), not (3 − 1).</p><span class="math">y[0,1,3] = (8 − 2)/(3 − 0) = 6/3 = <b>2</b></span></li><li><b>Step 3 — Write the formula with these values</b><p>Top diagonal: y[x₀] = 2, y[x₀,x₁] = 2, y[x₀,x₁,x₂] = 2.</p><span class="math">f(x) = 2 + (x−0)(2) + (x−0)(x−1)(2)</span></li><li><b>Step 4 — Expand</b><p>Multiply out and collect like terms.</p><span class="math">= 2 + 2x + 2x² − 2x = <b>2x² + 2</b></span></li><li><b>Step 5 — Check against every data point</b><p>Always do this. It takes ten seconds and catches everything.</p><span class="math">f(0) = 2 ✔ &nbsp; f(1) = 4 ✔ &nbsp; f(3) = 18+2 = 20 ✔</span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<h3>Worked example — larger table</h3>
+<p>x = 0, 1, 2, 4, 5 and y = 1, 9, 12, 5, 6.</p>
+<div class="tablewrap"><table><thead><tr><th>x</th><th>y</th><th>1st</th><th>2nd</th><th>3rd</th><th>4th</th></tr></thead><tbody><tr><td>0</td><td>1</td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td>8</td><td></td><td></td><td></td></tr><tr><td>1</td><td>9</td><td></td><td>−2.5</td><td></td><td></td></tr><tr><td></td><td></td><td>3</td><td></td><td>0.08333</td><td></td></tr><tr><td>2</td><td>12</td><td></td><td>−2.1667</td><td></td><td>0.16667</td></tr><tr><td></td><td></td><td>−3.5</td><td></td><td>0.91667</td><td></td></tr><tr><td>4</td><td>5</td><td></td><td>1.5</td><td></td><td></td></tr><tr><td></td><td></td><td>1</td><td></td><td></td><td></td></tr><tr><td>5</td><td>6</td><td></td><td></td><td></td><td></td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+
+<div class="box box--trap"><span class="box__label">Common mistake</span><ol>
+<li>Dividing by the wrong x-gap. For a kth-order divided difference the denominator spans <b>k intervals</b>: (x₍ᵢ₊ₖ₎ − xᵢ), <b>not</b> the adjacent gap.</li>
+<li>Using values from the wrong diagonal — always the <b>top</b>.</li>
+<li>Miscounting brackets. <b>Term number k carries (k−1) brackets:</b> term 1 has none, term 2 has one, term 3 has two, and so on.</li>
+</ol></div>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">Newton's divided difference interpolation formula is used when the values of the independent variable are:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>Equally spaced</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>Not equally spaced</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>Constant</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>None of the above</span></button></li></ul><div class="q__why"><b>Not equally spaced.</b> Verbatim from past papers — near-certain to appear.</div></div>
+<div class="q"><p class="q__stem">Divided differences are ___ with respect to their arguments.</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>symmetric</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>antisymmetric</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>always zero</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>always positive</span></button></li></ul><div class="q__why"><b>Symmetric.</b> y[x₀,x₁] = y[x₁,x₀]. The order you list the points in makes no difference to the value.</div></div>
+<div class="q"><p class="q__stem">For equally spaced data, y[x₀,x₁,…,xₙ] equals:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>Δⁿy₀</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>Δⁿy₀/(n! hⁿ)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>n! Δⁿy₀</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>Δⁿy₀/hⁿ</span></button></li></ul><div class="q__why"><b>Δⁿy₀/(n! hⁿ).</b> This bridge is why the divided difference formula collapses into Newton's forward formula whenever spacing happens to be equal.</div></div>
+<div class="q"><p class="q__stem">The nth divided difference of a polynomial of degree n is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>zero</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>constant</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>n!</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>undefined</span></button></li></ul><div class="q__why"><b>Constant.</b> It is the (n+1)th that becomes zero. Same rule as ordinary differences.</div></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="error">
+  <summary class="sec__head">
+    <span class="sec__num">07</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Error term in interpolation & 2-D interpolation</span>
+      <span class="sec__meta"><span class="pill pill--low">Light touch</span><span class="pill pill--low">Lecture 26</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--plain"><span class="box__label">In plain words</span><p>When you fit a polynomial through your data points, the polynomial is exactly right <i>at</i> those points — but slightly wrong <i>between</i> them. The error formula tells you how wrong.</p>
+<p>You will almost never calculate it. You just need to recognise and write it.</p></div>
+
+<div class="slip slip--key"><span class="slip__tab">Interpolation error</span><div class="slip__body">E(x) = y(x) − Pₙ(x)
+
+E(x) = [(x−x₀)(x−x₁)…(x−xₙ) / (n+1)!] · y⁽ⁿ⁺¹⁾(ξ)
+
+Equal spacing (forward form):
+E = [hⁿ⁺¹ · p(p−1)(p−2)…(p−n) / (n+1)!] · y⁽ⁿ⁺¹⁾(ξ)</div></div>
+
+<dl class="decoder"><dt>ξ</dt><dd>some unknown point inside the interval. You never compute it.</dd><dt>y⁽ⁿ⁺¹⁾</dt><dd>the (n+1)th derivative — one order higher than the polynomial degree</dd><dt>Π(x)</dt><dd>shorthand for the whole product (x−x₀)(x−x₁)…(x−xₙ)</dd></dl>
+
+<h3>Facts examiners ask</h3>
+<ul>
+<li>Error is defined as <b>E(x) = y(x) − Pₙ(x)</b> — real value minus approximation. Sign-flipped distractors are common.</li>
+<li>Π(x) <b>vanishes n+1 times</b> in the interval — once at each node.</li>
+<li>If y(x) is itself a polynomial of degree ≤ n, then y⁽ⁿ⁺¹⁾ = 0, so the <b>error is exactly zero</b>. The handouts make a point of this: <i>"no error in interpolation!!"</i></li>
+</ul>
+
+<h3>Newton's divided difference formula with error term</h3>
+<p>The error can be written as one extra divided difference that includes x itself:</p>
+<div class="slip"><span class="slip__tab">With error term</span><div class="slip__body">f(x) = y[x₀] + (x−x₀)y[x₀,x₁] + … <br>&nbsp;&nbsp;&nbsp;&nbsp;+ (x−x₀)(x−x₁)…(x−xₙ)·<b>y[x, x₀, x₁, …, xₙ]</b></div></div>
+
+<h3>Interpolation in two dimensions</h3>
+<div class="box box--plain"><span class="box__label">In plain words</span><p>You have a <b>grid</b> of values — f depends on both x and y. To find a value in the middle of the grid, interpolate <b>twice</b>:</p>
+<ol>
+<li>Go along each row, interpolating in the <b>x</b> direction. You now have a single column of values at your required x.</li>
+<li>Go down that column, interpolating in the <b>y</b> direction. That is your answer.</li>
+</ol>
+<p>Doing y first then x gives the same answer.</p></div>
+<div class="slip"><span class="slip__tab">Bivariate Newton forward</span><div class="slip__body">f(x₀+ph, y₀+qk) = (1 + Δₓ)^p (1 + Δ_y)^q f(x₀, y₀)<br><br>p = (x − x₀)/h &nbsp;&nbsp; q = (y − y₀)/k</div></div>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">If y(x) is approximated by a polynomial Pₙ(x) of degree n, the error is given by:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>ε(x) = y(x) − Pₙ(x)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>ε(x) = Pₙ(x) − y(x)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>ε(x) = y(x)·Pₙ(x)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>ε(x) = y(x)/Pₙ(x)</span></button></li></ul><div class="q__why"><b>y(x) − Pₙ(x)</b> — true value minus approximation. Option B is the sign-flipped trap.</div></div>
+<div class="q"><p class="q__stem">Let I be the closed interval spanned by x₀, x₁, …, xₙ, x. Then Π(x) vanishes ___ times in the interval.</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>n−1</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>n+1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>n</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>2n</span></button></li></ul><div class="q__why"><b>n+1.</b> There are n+1 nodes, and the product contains a bracket that goes to zero at each one.</div></div>
+<div class="q"><p class="q__stem">The error term in interpolation involves the derivative of order:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>n</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>n+1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>n−1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>2n</span></button></li></ul><div class="q__why"><b>n+1</b> — always one order higher than the degree of the fitted polynomial.</div></div>
+<div class="q"><p class="q__stem">If the tabulated function is itself a polynomial of degree ≤ n, the interpolation error is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>large</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>zero</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>constant</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>infinite</span></button></li></ul><div class="q__why"><b>Zero.</b> The (n+1)th derivative of a degree-n polynomial is 0, so the entire error term vanishes.</div></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="differentiation">
+  <summary class="sec__head">
+    <span class="sec__num">08</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Numerical differentiation</span>
+      <span class="sec__meta"><span class="pill pill--mid">Worth knowing</span><span class="pill pill--low">Lectures 27–29, 42</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--plain"><span class="box__label">In plain words</span><p>You want the <b>steepness</b> of a curve, but all you have is a table of numbers — no equation to differentiate.</p>
+<p>Solution: estimate the steepness from nearby values. If y jumps from 5 to 9 while x moves by 0.1, the slope is about (9−5)/0.1 = 40. Every formula below is a refinement of that one idea.</p></div>
+
+<h3>Where the series formulas come from</h3>
+<p>We know <code>hD = log(1 + Δ)</code> and <code>hD = −log(1 − ∇)</code>. Expanding those logarithms as series gives derivative formulas made purely of differences.</p>
+
+<div class="slip slip--key"><span class="slip__tab">Forward series — use at the START of a table</span><div class="slip__body">y′₀ = (1/h)[ Δy₀ − Δ²y₀/2 + Δ³y₀/3 − Δ⁴y₀/4 + Δ⁵y₀/5 − … ]
+
+y″₀ = (1/h²)[ Δ²y₀ − Δ³y₀ + (11/12)Δ⁴y₀ − (5/6)Δ⁵y₀ + … ]</div></div>
+
+<div class="slip slip--key"><span class="slip__tab">Backward series — use at the END of a table</span><div class="slip__body">y′ₙ = (1/h)[ ∇yₙ + ∇²yₙ/2 + ∇³yₙ/3 + ∇⁴yₙ/4 + … ]
+
+y″ₙ = (1/h²)[ ∇²yₙ + ∇³yₙ + (11/12)∇⁴yₙ + (5/6)∇⁵yₙ + … ]</div></div>
+
+<div class="box box--tip"><span class="box__label">Memory trick</span><p>The <b>forward</b> series <b>alternates in sign</b> (it comes from log(1+Δ)). The <b>backward</b> series is <b>all plus</b> (it comes from −log(1−∇)). The second-derivative coefficients <b>1, 1, 11/12, 5/6</b> are worth learning by heart.</p></div>
+
+<div class="box box--trap"><span class="box__label">Note on your handouts</span><p>The printed backward series in the handout PDF shows a stray minus sign on the ∇²/2 term. The correct expansion of −log(1−∇) has <b>all plus signs</b>, as written above. If a paper reproduces the handout's typo, either version will be accepted — but the all-plus form is the correct one.</p></div>
+
+<h3>⭐ Two-point and three-point formulas — heavily examined</h3>
+<p>These come from keeping only the <b>first term</b> of the series above.</p>
+
+<h4>First derivative — two-point formulas</h4>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Type</th><th>Formula</th><th>Accuracy</th></tr></thead><tbody><tr><td>Forward</td><td>y′ᵢ = [y(xᵢ+h) − y(xᵢ)] / h</td><td>O(h)</td></tr><tr><td>Backward</td><td>y′ᵢ = [y(xᵢ) − y(xᵢ−h)] / h</td><td>O(h)</td></tr><tr><td><b>Central</b> ⭐</td><td><b>y′ᵢ = [y(xᵢ+h) − y(xᵢ−h)] / 2h</b></td><td>O(h²) — best</td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+<div class="box box--exam"><span class="box__label">Exam alert</span><p>When a VU question says <b>“using the two-point equation”</b>, it means the <b>central</b> version — unless the point sits at the edge of the table, where there is no neighbour on one side and you must use forward or backward instead.</p></div>
+
+<h4>Second derivative — three-point formulas</h4>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Type</th><th>Formula</th></tr></thead><tbody><tr><td>Forward</td><td>y″ᵢ = [y(xᵢ+2h) − 2y(xᵢ+h) + y(xᵢ)] / h²</td></tr><tr><td>Backward</td><td>y″ᵢ = [y(xᵢ) − 2y(xᵢ−h) + y(xᵢ−2h)] / h²</td></tr><tr><td><b>Central</b> ⭐</td><td><b>y″ᵢ = [y(xᵢ+h) − 2y(xᵢ) + y(xᵢ−h)] / h²</b></td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+
+<h3>Worked example — first derivative by two-point formula</h3>
+<p>Find f′ at x = 0.1 for this table:</p>
+<div class="tablewrap"><table><thead><tr><th>x</th><th>0.1</th><th>0.2</th><th>0.3</th><th>0.4</th><th>0.5</th><th>0.6</th></tr></thead><tbody><tr><td>f(x)</td><td>0.105</td><td>0.342</td><td>0.652</td><td>0.756</td><td>0.812</td><td>0.924</td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+<div class="steps"><div class="steps__head">Find f′(0.1)<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Check which formula is possible</b><p>x = 0.1 is the <b>first</b> point. There is nothing to its left, so the central formula cannot be used.</p><span class="math">No point at x = 0.0 → use the <b>forward</b> two-point formula</span></li><li><b>Step 2 — Identify the values</b><p>Read straight off the table.</p><span class="math">h = 0.1 &nbsp; f(0.1) = 0.105 &nbsp; f(0.2) = 0.342</span></li><li><b>Step 3 — Substitute</b><p>Next value minus current, divided by h.</p><span class="math">f′(0.1) = [f(0.2) − f(0.1)] / h = (0.342 − 0.105) / 0.1</span></li><li><b>Step 4 — Compute</b><p>Final answer.</p><span class="math">= 0.237 / 0.1 = <b>2.37</b></span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<h3>Worked example — second derivative by three-point formula</h3>
+<p>Find f″ at x = 0.2 for this table:</p>
+<div class="tablewrap"><table><thead><tr><th>x</th><th>0.1</th><th>0.2</th><th>0.3</th><th>0.4</th><th>0.5</th><th>0.6</th></tr></thead><tbody><tr><td>f(x)</td><td>0.125</td><td>0.302</td><td>0.602</td><td>0.706</td><td>0.812</td><td>0.924</td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+<div class="steps"><div class="steps__head">Find f″(0.2)<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Check which formula is possible</b><p>x = 0.2 has a neighbour on <b>both</b> sides (0.1 and 0.3), so the central formula works — and it is the most accurate.</p><span class="math">Use central: y″ = [y(x+h) − 2y(x) + y(x−h)] / h²</span></li><li><b>Step 2 — Identify the three values</b><p>One before, the point itself, one after.</p><span class="math">h = 0.1<br>f(0.1) = 0.125 &nbsp; f(0.2) = 0.302 &nbsp; f(0.3) = 0.602</span></li><li><b>Step 3 — Substitute</b><p>Note the <b>2</b> multiplying the middle value, and h is <b>squared</b>.</p><span class="math">f″(0.2) = [0.602 − 2(0.302) + 0.125] / (0.1)²</span></li><li><b>Step 4 — Simplify the top</b><p>Careful with the subtraction.</p><span class="math">= [0.602 − 0.604 + 0.125] / 0.01 = 0.123 / 0.01</span></li><li><b>Step 5 — Divide</b><p>Final answer.</p><span class="math">= <b>12.3</b></span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<h3>Differentiation using interpolation (unequal spacing)</h3>
+<p>If the data is <b>not</b> equally spaced you cannot use Δ or ∇ series. Instead: fit an interpolating polynomial (the handouts prefer <b>Newton's divided difference</b> "in view of economy of computation"), then <b>differentiate that polynomial</b>.</p>
+<div class="slip"><span class="slip__tab">Differentiated divided-difference polynomial</span><div class="slip__body">P′ₙ(x) = y[x₀,x₁]
+&nbsp;&nbsp;+ [(x−x₁) + (x−x₀)]·y[x₀,x₁,x₂]
+&nbsp;&nbsp;+ [(x−x₀)(x−x₁) + (x−x₁)(x−x₂) + (x−x₀)(x−x₂)]·y[x₀,x₁,x₂,x₃]
+&nbsp;&nbsp;+ …
+
+<span style="opacity:.7">Rule: the derivative of a product of k brackets is the sum of k terms, each omitting one bracket.</span></div></div>
+
+<div class="box box--exam"><span class="box__label">Conceptual point that gets tested</span><p>Even when Pₙ(x) and y(x) <b>agree exactly at every tabular point</b>, their <b>derivatives can differ substantially</b> at those same points. The handouts show a figure of two curves crossing at the nodes with visibly different slopes. For higher derivatives it is worse.</p>
+<p><b>Takeaway:</b> numerical <b>differentiation amplifies</b> error; numerical <b>integration smooths</b> it. So integration is more accurate than differentiation.</p></div>
+
+<h3>Three-point and five-point formulas (Lecture 42)</h3>
+<p>These are the <i>interpolation-based</i> derivative formulas — distinct from the difference-operator series above.</p>
+<div class="slip"><span class="slip__tab">Three-point formulas for f′</span><div class="slip__body"><b>End-point:</b>
+f′(x₀) = (1/2h)·[ −3f(x₀) + 4f(x₀+h) − f(x₀+2h) ] &nbsp;&nbsp;error (h²/3)f‴(ξ)
+
+<b>Mid-point:</b>
+f′(x₀) = (1/2h)·[ f(x₀+h) − f(x₀−h) ] &nbsp;&nbsp;error −(h²/6)f‴(ξ)</div></div>
+<div class="slip slip--key"><span class="slip__tab">⭐ Five-point formula for f′</span><div class="slip__body">f′(x₀) = (1/12h)·[ f(x₀−2h) − 8f(x₀−h) + 8f(x₀+h) − f(x₀+2h) ]<br><br><span style='opacity:.7'>Coefficients: <b>1, −8, 0, 8, −1</b> over 12h</span></div></div>
+
+<p><b>Which is more accurate?</b> The mid-point formula has error coefficient h²/6 versus h²/3 for the end-point version — so mid-point is about <b>twice as accurate</b>. And the five-point formula beats both.</p>
+
+<p>The handouts demonstrate this with f(x) = x·eˣ, approximating f′(2.0) where the true value is 22.167168:</p>
+<div class="tablewrap"><table><thead><tr><th>Formula</th><th>h</th><th>Result</th><th>Error</th></tr></thead><tbody><tr><td>Three-point end-point</td><td>0.1</td><td>22.032310</td><td>1.35×10⁻¹</td></tr><tr><td>Three-point end-point</td><td>−0.1</td><td>22.005452</td><td>1.13×10⁻¹</td></tr><tr><td>Three-point mid-point</td><td>0.1</td><td>22.228790</td><td>−6.16×10⁻²</td></tr><tr><td>Three-point mid-point</td><td>0.2</td><td>22.414163</td><td>−2.47×10⁻¹</td></tr><tr><td><b>Five-point</b></td><td><b>0.1</b></td><td><b>22.166999</b></td><td><b>1.69×10⁻⁴</b></td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+<div class="box box--exam"><span class="box__label">Exam alert</span><p>The handouts state it explicitly: <b>“the five-point formula gives the superior result.”</b> Expect this as a conceptual MCQ.</p></div>
+
+<div class="box box--trap"><span class="box__label">Common mistake</span><ol>
+<li>Forgetting to <b>square h</b> in second-derivative formulas.</li>
+<li>Using the central formula at an endpoint where a neighbour does not exist.</li>
+<li>Mixing forward differences into the backward series, or vice versa.</li>
+<li>Losing the alternating signs in the forward series.</li>
+</ol></div>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">The two-point central formula for the first derivative is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>(yᵢ₊₁ − yᵢ)/h</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>(yᵢ₊₁ − yᵢ₋₁)/2h</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>(yᵢ₊₁ − 2yᵢ + yᵢ₋₁)/h²</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>(yᵢ − yᵢ₋₁)/h</span></button></li></ul><div class="q__why"><b>(yᵢ₊₁ − yᵢ₋₁)/2h.</b> Note the <b>2h</b> on the bottom — you span two intervals, so you divide by two intervals. Option C is the second derivative.</div></div>
+<div class="q"><p class="q__stem">The three-point central formula for the second derivative is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>(yᵢ₊₁ − yᵢ₋₁)/2h</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>(yᵢ₊₁ − 2yᵢ + yᵢ₋₁)/h²</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>(yᵢ₊₂ − yᵢ)/2h</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>(yᵢ₊₁ + yᵢ₋₁)/h²</span></button></li></ul><div class="q__why"><b>(yᵢ₊₁ − 2yᵢ + yᵢ₋₁)/h².</b> Watch for two things: the <b>minus 2</b> in the middle, and h <b>squared</b> below.</div></div>
+<div class="q"><p class="q__stem">hD in terms of the forward difference operator is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>log(1 + Δ)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>log(1 − Δ)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>−log(1 + Δ)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>e^Δ</span></button></li></ul><div class="q__why"><b>log(1 + Δ).</b> Comes straight from E = 1 + Δ and E = e^(hD): take logs of both.</div></div>
+<div class="q"><p class="q__stem">The coefficient of Δ⁴y₀ in the second-derivative forward series is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>1</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>11/12</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>5/6</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>1/4</span></button></li></ul><div class="q__why"><b>11/12.</b> The sequence for y″ is 1, 1, 11/12, 5/6 — an odd-looking set, which is exactly why it is asked.</div></div>
+<div class="q"><p class="q__stem">The five-point formula for f′(x₀) has coefficients:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>1, −8, 8, −1 over 12h</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>1, 4, 2, 4, 1 over 3h</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>−3, 4, −1 over 2h</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>1, −2, 1 over h²</span></button></li></ul><div class="q__why"><b>1, −8, 8, −1 over 12h.</b> Option B is Simpson's rule (integration), option C is the three-point end-point formula, option D is the second derivative.</div></div>
+<div class="q"><p class="q__stem">Compared to numerical integration, numerical differentiation is generally:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>more accurate</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>less accurate</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>equally accurate</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>exact</span></button></li></ul><div class="q__why"><b>Less accurate.</b> Differentiation amplifies small errors in the data; integration averages them out.</div></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="richardson">
+  <summary class="sec__head">
+    <span class="sec__num">09</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Richardson's extrapolation</span>
+      <span class="sec__meta"><span class="pill pill--mid">Worth knowing</span><span class="pill pill--low">Lecture 30</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--plain"><span class="box__label">In plain words</span><p>Do the calculation twice — once with step h, once with step h/2 — then <b>combine the two answers in a clever way that cancels most of the error</b>.</p>
+<p>You get a far better answer without needing any extra data. It feels like getting something for nothing, and mathematically it nearly is.</p></div>
+
+<h3>The derivation in three lines</h3>
+<p>Using the two-point central formula, y′(x) = F(h) + E, where the error E = c₁h² + c₂h⁴ + …</p>
+<div class="steps"><div class="steps__head">How the formula appears<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Write it at step size h</b><p>The leading error term is c₁h².</p><span class="math">y′(x) = F(h) + c₁h² + c₂h⁴ + …</span></li><li><b>Step 2 — Write it again at step size h/2</b><p>Halving h divides h² by 4 and h⁴ by 16.</p><span class="math">y′(x) = F(h/2) + c₁h²/4 + c₂h⁴/16 + …</span></li><li><b>Step 3 — Multiply the second by 4</b><p>Now the c₁ terms match in size.</p><span class="math">4y′(x) = 4F(h/2) + c₁h² + c₂h⁴/4 + …</span></li><li><b>Step 4 — Subtract line 1 from line 3</b><p>The c₁h² terms cancel — that was the whole point.</p><span class="math">3y′(x) = 4F(h/2) − F(h) + …</span></li><li><b>Step 5 — Divide by 3</b><p>A fourth-order accurate formula built from two second-order results.</p><span class="math"><b>F₁(h/2) = [4·F(h/2) − F(h)] / 3</b></span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<div class="slip slip--key"><span class="slip__tab">⭐ General Richardson formula</span><div class="slip__body">Fₘ(h/2ᵐ) = [ 4ᵐ·Fₘ₋₁(h/2ᵐ) − Fₘ₋₁(h/2^(m−1)) ] / (4ᵐ − 1)
+
+for m = 1, 2, 3, …</div></div>
+
+<div class="tablewrap"><table><thead><tr><th>m</th><th>Denominator (4ᵐ − 1)</th><th>Resulting accuracy</th></tr></thead><tbody><tr><td>1</td><td><b>3</b></td><td>O(h⁴)</td></tr><tr><td>2</td><td><b>15</b></td><td>O(h⁶)</td></tr><tr><td>3</td><td><b>63</b></td><td>O(h⁸)</td></tr></tbody></table></div>
+<p>Repeating this refinement is called <b>“extrapolation to the limit”</b>.</p>
+
+<h3>Worked example</h3>
+<div class="steps"><div class="steps__head">If F(h) = 0.5 and F(h/2) = 0.51, find the improved value<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Pick the right formula</b><p>First stage, so m = 1 and the denominator is 4¹ − 1 = 3.</p><span class="math">F₁ = [4·F(h/2) − F(h)] / 3</span></li><li><b>Step 2 — Substitute</b><p>The <b>finer</b> value (h/2) is the one that gets multiplied by 4.</p><span class="math">F₁ = [4(0.51) − 0.5] / 3</span></li><li><b>Step 3 — Compute</b><p>Final answer.</p><span class="math">= (2.04 − 0.5)/3 = 1.54/3 = <b>0.5133</b></span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<div class="box box--trap"><span class="box__label">Common mistake</span><ol>
+<li>Using denominator 4 instead of 3 for m = 1. <b>It is 4ᵐ − 1, not 4ᵐ.</b></li>
+<li>Swapping F(h) and F(h/2). The <b>finer</b> value (h/2) always gets the 4ᵐ multiplier.</li>
+</ol></div>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">The first stage of Richardson's extrapolation gives:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>[4F(h/2) − F(h)]/4</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>[4F(h/2) − F(h)]/3</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>[F(h) − 4F(h/2)]/3</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>[4F(h) − F(h/2)]/3</span></button></li></ul><div class="q__why"><b>[4F(h/2) − F(h)]/3.</b> Option A uses 4 instead of 3 (the classic slip). Option D swaps which value gets the 4.</div></div>
+<div class="q"><p class="q__stem">The general Richardson formula has denominator:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>4ᵐ</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>4ᵐ − 1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>4ᵐ + 1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>2ᵐ − 1</span></button></li></ul><div class="q__why"><b>4ᵐ − 1.</b> Gives 3, 15, 63 for m = 1, 2, 3.</div></div>
+<div class="q"><p class="q__stem">Repeating Richardson's process until the required accuracy is achieved is called:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>iteration</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>extrapolation to the limit</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>interpolation</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>convergence test</span></button></li></ul><div class="q__why"><b>Extrapolation to the limit</b> — the handouts' exact phrase.</div></div>
+<div class="q"><p class="q__stem">Combining two second-order accurate results by Richardson's method yields a formula of order:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>2</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>3</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">C</span><span>4</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>6</span></button></li></ul><div class="q__why"><b>4.</b> You cancel the h² error term, leaving h⁴ as the new leading error.</div></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="integration">
+  <summary class="sec__head">
+    <span class="sec__num">10</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Numerical integration — Trapezoidal & Simpson</span>
+      <span class="sec__meta"><span class="pill pill--must">Must know</span><span class="pill pill--low">Lectures 31–33</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--exam"><span class="box__label">Exam alert</span><p><b>Guaranteed exam content.</b> You will get at least one numerical from this section, plus an almost-certain “how many intervals?” MCQ.</p></div>
+
+<div class="box box--plain"><span class="box__label">In plain words</span><p>You want the <b>area under a curve</b>, but you cannot integrate the function by hand — or you only have a table of numbers.</p>
+<p>So you <b>chop the area into vertical strips</b> and add the strips up.</p>
+<ul>
+<li><b>Trapezoidal rule</b> — each strip has a <b>straight slanted top</b> (a trapezium). Quick, least accurate.</li>
+<li><b>Simpson's 1/3</b> — takes strips <b>two at a time</b> and puts a <b>curve (parabola)</b> over the pair. More accurate.</li>
+<li><b>Simpson's 3/8</b> — takes strips <b>three at a time</b> with a <b>cubic</b> over them.</li>
+</ul>
+<p>That is the entire chapter. The formulas are just bookkeeping for adding the strips.</p></div>
+
+<h3>Why numerical integration is needed</h3>
+<p>All three of these are valid reasons, and the MCQ answer is usually <b>“all of the above”</b>:</p>
+<ol>
+<li>The <b>antiderivative does not exist</b> in closed form (e.g. ∫e^(−x²)dx).</li>
+<li>Analytical evaluation is possible but <b>extremely complicated</b>.</li>
+<li>The integrand is <b>given only in tabular form</b> — there is no formula at all.</li>
+</ol>
+
+<h4>Newton–Cotes background</h4>
+<p>Approximate f(x) by an interpolating polynomial at equally spaced nodes, then integrate that polynomial. The weights <code>cₖ = ∫Lₖ(x)dx</code> are called <b>Cotes numbers</b>.</p>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Strips per panel</th><th>Polynomial fitted</th><th>Resulting rule</th></tr></thead><tbody><tr><td>1</td><td>straight line (2 points)</td><td><b>Trapezoidal</b></td></tr><tr><td>2</td><td>parabola (3 points)</td><td><b>Simpson's 1/3</b></td></tr><tr><td>3</td><td>cubic (4 points)</td><td><b>Simpson's 3/8</b></td></tr></tbody></table></div>
+<div class="box box--tip"><span class="box__label">Memory trick</span><p><b>Line = Trapezoid. Parabola = 1/3. Cubic = 3/8.</b><br>And the rule name tells you how many strips it eats at a time: the <b>1/3 rule eats 2 strips</b>, the <b>3/8 rule eats 3 strips</b>.</p></div>
+
+<h3>⭐ The three formulas</h3>
+<div class="slip slip--key"><span class="slip__tab">Trapezoidal rule</span><div class="slip__body">∫ f(x)dx = (h/2)·[ y₀ + 2(y₁ + y₂ + … + yₙ₋₁) + yₙ ]
+
+Pattern: <b>1, 2, 2, 2, …, 2, 1</b> &nbsp; with h/2 outside
+Intervals allowed: <b>ANY n</b></div></div>
+
+<div class="slip slip--key"><span class="slip__tab">Simpson's 1/3 rule</span><div class="slip__body">∫ f(x)dx = (h/3)·[ y₀ + 4(odd subscripts) + 2(even subscripts) + yₙ ]
+
+Pattern: <b>1, 4, 2, 4, 2, …, 4, 1</b> &nbsp; with h/3 outside
+Intervals allowed: <b>n must be EVEN</b></div></div>
+
+<div class="slip slip--key"><span class="slip__tab">Simpson's 3/8 rule</span><div class="slip__body">∫ f(x)dx = (3h/8)·[ y₀ + 3(y₁+y₂) + 2y₃ + 3(y₄+y₅) + 2y₆ + … + yₙ ]
+
+Pattern: <b>1, 3, 3, 2, 3, 3, 2, …, 3, 3, 1</b> &nbsp; with 3h/8 outside
+Intervals allowed: <b>n must be a MULTIPLE OF 3</b></div></div>
+
+<div class="box box--tip"><span class="box__label">Memory trick</span><p>For Simpson's 1/3: <b>“Odd → fOur, Even → twO.”</b> Odd-numbered subscripts get 4, even-numbered get 2. The first and last always get 1.</p></div>
+
+<h3>🔴 The interval rule — the most repeated MCQ family in the paper</h3>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Rule</th><th>Valid number of intervals</th></tr></thead><tbody><tr><td>Trapezoidal</td><td><b>any</b> — 1, 2, 3, 4, 5, 7, 11 all fine</td></tr><tr><td>Simpson's <b>1/3</b></td><td><b>EVEN</b> — 2, 4, 6, 8, 10, 12 …</td></tr><tr><td>Simpson's <b>3/8</b></td><td><b>MULTIPLE OF 3</b> — 3, 6, 9, 12, 15 …</td></tr></tbody></table></div>
+<div class="box box--exam"><span class="box__label">Exam alert</span><p>Past-paper items you will almost certainly meet:</p>
+<ul>
+<li>“To apply Simpson's 1/3 rule, valid number of intervals are: 7 / <b>8</b> / 5 / 3”</li>
+<li>“For Simpson's 1/3 rule no. of intervals must be: <b>2 (even)</b> / 3 / 5 / 7”</li>
+<li>“To apply Simpson's 3/8 rule, the number of intervals must be: 10 / 11 / <b>12</b> / 13”</li>
+<li>“To apply Simpson's 3/8 rule, the number of intervals can be: 4 / 7 / <b>9</b> / 8”</li>
+</ul>
+<p><b>⚠ Note the trap:</b> <b>12 is both even and a multiple of 3</b>, so it is valid for <i>both</i> Simpson rules. Read whether the question asks 1/3 or 3/8.</p></div>
+
+<h3>Worked example — Trapezoidal rule</h3>
+<p>Evaluate ∫₀⁴ x² dx with h = 1.</p>
+<div class="steps"><div class="steps__head">Trapezoidal, step by step<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Build the table of values</b><p>Just square each x.</p><span class="math">x:&nbsp;&nbsp;&nbsp; 0 &nbsp; 1 &nbsp; 2 &nbsp; 3 &nbsp; 4<br>f(x): 0 &nbsp; 1 &nbsp; 4 &nbsp; 9 &nbsp; 16</span></li><li><b>Step 2 — Count the intervals</b><p>Five points means four gaps. Trapezoidal accepts any n, so we are fine.</p><span class="math">n = 5 points − 1 = <b>4 intervals</b> &nbsp; h = 1</span></li><li><b>Step 3 — Apply the 1, 2, 2, 2, 1 pattern</b><p>First and last get 1. Everything in between gets 2.</p><span class="math">I = (h/2)[y₀ + 2(y₁ + y₂ + y₃) + y₄]</span></li><li><b>Step 4 — Substitute the numbers</b><p>Middle values are 1, 4 and 9.</p><span class="math">I = (1/2)[0 + 2(1 + 4 + 9) + 16]</span></li><li><b>Step 5 — Compute</b><p>Inside the bracket first, then multiply by h/2.</p><span class="math">= (1/2)[0 + 28 + 16] = (1/2)(44) = <b>22</b></span></li><li><b>Step 6 — Sanity check</b><p>The exact answer is 64/3 ≈ 21.33. Trapezoidal <b>over-estimates</b> here because the curve bends upward and the straight tops sit above it. Nice conceptual point to know.</p><span class="math">Trapezoidal = 22 &nbsp;vs&nbsp; exact ≈ 21.33</span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<h3>Worked example — Simpson's 1/3 rule</h3>
+<p>Evaluate ∫₀⁴ f(x)dx with h = 1, where f = −1, 0, 1, 2, 3 at x = 0,1,2,3,4.</p>
+<div class="steps"><div class="steps__head">Simpson's 1/3, step by step<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Check the interval rule FIRST</b><p>Always do this before anything else. 4 is even, so Simpson's 1/3 is allowed.</p><span class="math">n = 5 points − 1 = 4 &nbsp; → &nbsp; <b>even ✔</b></span></li><li><b>Step 2 — Label which subscripts are odd and even</b><p>y₁ and y₃ are odd. y₂ is even. y₀ and y₄ are the ends.</p><span class="math">odd: y₁ = 0, y₃ = 2<br>even: y₂ = 1<br>ends: y₀ = −1, y₄ = 3</span></li><li><b>Step 3 — Apply the 1, 4, 2, 4, 1 pattern</b><p>Odd gets 4, even gets 2, ends get 1.</p><span class="math">I = (h/3)[y₀ + 4(y₁ + y₃) + 2(y₂) + y₄]</span></li><li><b>Step 4 — Substitute</b><p>Put the numbers in carefully.</p><span class="math">I = (1/3)[−1 + 4(0 + 2) + 2(1) + 3]</span></li><li><b>Step 5 — Compute</b><p>Bracket first.</p><span class="math">= (1/3)[−1 + 8 + 2 + 3] = (1/3)(12) = <b>4</b></span></li><li><b>Step 6 — Sanity check</b><p>This data is the straight line y = x − 1, whose exact integral over [0,4] is 4. Simpson is <b>exact</b> here — as expected, since its degree of precision is 3.</p><span class="math">Simpson = 4 = exact ✔</span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<h3>Worked example — Simpson's 3/8 rule</h3>
+<div class="steps"><div class="steps__head">∫₀³ f dx with h = 1 and f = 1, 2, 5, 10<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Check the interval rule</b><p>Four points → 3 intervals. 3 is a multiple of 3, so the 3/8 rule is allowed.</p><span class="math">n = 3 &nbsp; → &nbsp; <b>multiple of 3 ✔</b></span></li><li><b>Step 2 — Apply the 1, 3, 3, 1 pattern</b><p>With only one panel there is no “2” yet — that appears from the 4th interval onwards.</p><span class="math">I = (3h/8)[y₀ + 3(y₁ + y₂) + y₃]</span></li><li><b>Step 3 — Substitute and compute</b><p>Note the multiplier is <b>3h/8</b>, not h/3.</p><span class="math">= (3/8)[1 + 3(2 + 5) + 10] = (3/8)[1 + 21 + 10]<br>= (3/8)(32) = <b>12</b></span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<h3>Comparison table — learn this, it is pure MCQ marks</h3>
+<div class="tablewrap"><table><thead><tr><th></th><th>Trapezoidal</th><th>Simpson 1/3</th><th>Simpson 3/8</th></tr></thead><tbody><tr><td>Curve fitted</td><td>Line</td><td>Parabola</td><td>Cubic</td></tr><tr><td>Points per panel</td><td>2</td><td>3</td><td>4</td></tr><tr><td>Strips per panel</td><td>1</td><td>2</td><td>3</td></tr><tr><td>Interval condition</td><td>any n</td><td>n even</td><td>n ×3</td></tr><tr><td>Multiplier</td><td>h/2</td><td>h/3</td><td>3h/8</td></tr><tr><td>Pattern</td><td>1,2,…,2,1</td><td>1,4,2,…,4,1</td><td>1,3,3,2,…,3,3,1</td></tr><tr><td>Accuracy</td><td>O(h²)</td><td>O(h⁴)</td><td>O(h⁴)</td></tr><tr><td>Degree of precision</td><td>1</td><td>3</td><td>3</td></tr><tr><td>Error denominator</td><td>12</td><td>180</td><td>80</td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+
+<div class="box box--trap"><span class="box__label">Common mistake</span><ol>
+<li>Using Simpson's 1/3 with an <b>odd</b> number of intervals. Instant zero.</li>
+<li>Giving 4 to even subscripts and 2 to odd. <b>It is the reverse.</b></li>
+<li>Using h/3 for the 3/8 rule, or 3h/8 for the 1/3 rule.</li>
+<li>Miscounting n. Five tabulated values means <b>four</b> intervals. <b>n = points − 1.</b></li>
+<li>Forgetting to compute h = (b−a)/n when it is not given.</li>
+</ol></div>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">In Simpson's 1/3 rule, f(x) is of the form:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>ax + b</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>ax² + bx + c</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>ax³+bx²+cx+d</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>ax⁴+bx³+cx²+dx+e</span></button></li></ul><div class="q__why"><b>ax² + bx + c.</b> The 1/3 rule fits a <b>quadratic</b> through three points. Option A is the Trapezoidal rule, option C is the 3/8 rule.</div></div>
+<div class="q"><p class="q__stem">To apply Simpson's 1/3 rule, valid number of intervals are:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>7</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>8</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>5</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>3</span></button></li></ul><div class="q__why"><b>8</b> — the only even option. 7, 5 and 3 are all odd, so the 1/3 rule cannot be applied.</div></div>
+<div class="q"><p class="q__stem">To apply Simpson's 3/8 rule, the number of intervals must be:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>10</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>11</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">C</span><span>12</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>13</span></button></li></ul><div class="q__why"><b>12</b> — the only multiple of 3. (12 happens to be even too, so it would also work for the 1/3 rule.)</div></div>
+<div class="q"><p class="q__stem">The Trapezoidal rule is exact for polynomials of degree:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>0</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>2</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>3</span></button></li></ul><div class="q__why"><b>1.</b> It fits straight lines, so it integrates straight lines perfectly and anything curved approximately.</div></div>
+<div class="q"><p class="q__stem">Simpson's 1/3 rule, although based on fitting a quadratic, is exact for polynomials up to degree:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>2</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>3</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>4</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>1</span></button></li></ul><div class="q__why"><b>3.</b> Genuinely surprising and therefore a favourite MCQ — the cubic error terms cancel out, giving one extra degree for free.</div></div>
+<div class="q"><p class="q__stem">While integrating ∫ from a to b, the width of the interval h is found by:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>(a+b)/n</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>(b−a)/n</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>(a−b)/n</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>None of the given choices</span></button></li></ul><div class="q__why"><b>(b−a)/n</b> — total width divided by the number of strips.</div></div>
+<div class="q"><p class="q__stem">The weighting coefficients in Newton–Cotes formulae are called:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>Lagrange numbers</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>Cotes numbers</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>Simpson numbers</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>Bernoulli numbers</span></button></li></ul><div class="q__why"><b>Cotes numbers</b>, defined by cₖ = ∫Lₖ(x)dx.</div></div>
+<div class="q"><p class="q__stem">Which of the following lead(s) towards numerical integration methods?</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>Analytical evaluation is very complicated</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>Integrand is given in tabular form</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>Analytical evaluation is impossible</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">D</span><span>All above choices are true</span></button></li></ul><div class="q__why"><b>All of them.</b> This phrasing appears verbatim — when you see three plausible reasons plus an “all of the above”, take the “all”.</div></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="romberg">
+  <summary class="sec__head">
+    <span class="sec__num">11</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Romberg's integration & double integration</span>
+      <span class="sec__meta"><span class="pill pill--mid">Worth knowing</span><span class="pill pill--low">Lecture 34</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--plain"><span class="box__label">In plain words</span><p><b>Romberg = Richardson applied to the Trapezoidal rule.</b> That is genuinely all it is.</p>
+<p>Trapezoidal is cheap but rough. So compute it at h, then h/2, then h/4 — and combine those rough answers using the same 4ᵐ trick from Richardson's extrapolation. The combined answer is excellent.</p></div>
+
+<div class="slip slip--key"><span class="slip__tab">Romberg's integration</span><div class="slip__body">I_(T,m)(h/2ᵐ) = [ 4ᵐ·I_(T,m−1)(h/2ᵐ) − I_(T,m−1)(h/2^(m−1)) ] / (4ᵐ − 1)
+
+for m = 1, 2, 3, …&nbsp;&nbsp;with&nbsp; I_(T,0)(h) = plain Trapezoidal value</div></div>
+
+<div class="box box--tip"><span class="box__label">Memory trick</span><p>This is the <b>identical formula</b> to Richardson's extrapolation — only the thing being refined changes (a derivative there, an integral here). <b>Learn one formula, get two topics.</b></p></div>
+
+<h3>The Romberg table</h3>
+<div class="tablewrap"><table><thead><tr><th>Step</th><th>m = 0 (Trapezoidal)</th><th>m = 1</th><th>m = 2</th><th>m = 3</th></tr></thead><tbody><tr><td>h</td><td>I(h)</td><td></td><td></td><td></td></tr><tr><td>h/2</td><td>I(h/2)</td><td>I_T,1</td><td></td><td></td></tr><tr><td>h/4</td><td>I(h/4)</td><td>I_T,1</td><td>I_T,2</td><td></td></tr><tr><td>h/8</td><td>I(h/8)</td><td>I_T,1</td><td>I_T,2</td><td>I_T,3</td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+<p>Fill the first column with Trapezoidal values at successively halved h, then work rightwards. <b>The best answer is the bottom-right entry.</b></p>
+
+<div class="box box--exam"><span class="box__label">Exam alert</span><ul>
+<li>The <b>m = 1 column</b> of a Romberg table is exactly <b>Simpson's 1/3 rule</b>. Neat conceptual MCQ.</li>
+<li>Denominators by column: <b>3, 15, 63, 255</b> (= 4ᵐ − 1).</li>
+</ul></div>
+
+<h3>Double integration</h3>
+<div class="box box--plain"><span class="box__label">In plain words</span><p>Now the area becomes a <b>volume</b> — you are integrating over a rectangle in x and y, not a line.</p>
+<p>The method is exactly what you would guess: <b>integrate in one direction, then integrate the results in the other direction.</b> You apply the same Trapezoidal or Simpson rule twice.</p></div>
+
+<div class="slip"><span class="slip__tab">Set-up for ∫∫ f(x,y) dx dy</span><div class="slip__body">Region: x from a to b, &nbsp; y from c to d
+
+Split [a,b] into N pieces: &nbsp; <b>h = (b − a)/N</b>
+Split [c,d] into M pieces: &nbsp; <b>k = (d − c)/M</b>
+
+xᵢ = x₀ + ih &nbsp;(x₀ = a, x_N = b)
+yⱼ = y₀ + jk &nbsp;(y₀ = c, y_M = d)</div></div>
+
+<h4>The procedure (worth full marks even without finishing the arithmetic)</h4>
+<ol>
+<li>Build a <b>grid table</b> of f(xᵢ, yⱼ).</li>
+<li>Integrate along <b>x</b> for each fixed y → one value per row.</li>
+<li>Integrate those results along <b>y</b> → final answer.</li>
+</ol>
+
+<div class="slip"><span class="slip__tab">Trapezoidal double-integration weights</span><div class="slip__body">I = (hk/4)·[ (4 corner values)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 2(all edge values)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 4(all interior values) ]</div></div>
+<div class="slip"><span class="slip__tab">Simpson double-integration weights</span><div class="slip__body">I = (hk/9)·[ the 1-4-2-4-1 pattern applied in BOTH
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; directions, with the weights multiplied ]
+
+e.g. a point that is "4" in x and "4" in y gets weight 16
+&nbsp;&nbsp;&nbsp; "4" in x and "1" in y gets weight 4</div></div>
+
+<h3>Worked example — structure only</h3>
+<p>Evaluate I = ∫₁² ∫₁² dx dy/(x+y) by the Trapezoidal rule with h = k = 0.25.</p>
+<div class="steps"><div class="steps__head">How to lay it out<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Set up both grids</b><p>Both variables run over the same values here.</p><span class="math">x and y = 1.00, 1.25, 1.50, 1.75, 2.00<br>5×5 grid, so N = M = 4</span></li><li><b>Step 2 — Fill the grid with f(x,y) = 1/(x+y)</b><p>Just add the two values and take the reciprocal.</p><span class="math">f(1,1) = 0.5 &nbsp; f(1,1.25) = 0.4444<br>f(1,1.5) = 0.4 &nbsp; f(1,1.75) = 0.3636<br>f(1,2) = 0.3333 &nbsp;… and so on</span></li><li><b>Step 3 — Integrate across each ROW (in x)</b><p>Apply the ordinary h/2 trapezoidal formula to each row of five numbers.</p><span class="math">Gives one value per row → a column of 5 numbers</span></li><li><b>Step 4 — Integrate DOWN that column (in y)</b><p>Apply the k/2 trapezoidal formula to those five results.</p><span class="math">That single number is the answer</span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+<div class="box box--exam"><span class="box__label">Exam alert</span><p>VU almost never asks you to finish this by hand under time pressure — but <b>the method statement is worth full marks</b>. Learn the four steps and the corner/edge/interior weighting.</p></div>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">Romberg's integration is obtained by applying ___ to the Trapezoidal rule.</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>Newton's forward formula</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>Richardson's extrapolation</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>Lagrange interpolation</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>Simpson's rule</span></button></li></ul><div class="q__why"><b>Richardson's extrapolation.</b> Same 4ᵐ/(4ᵐ−1) combining trick, applied to integrals instead of derivatives.</div></div>
+<div class="q"><p class="q__stem">In Romberg's formula the denominator for the first extrapolation (m=1) is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>4</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>3</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>15</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>2</span></button></li></ul><div class="q__why"><b>3</b>, because 4¹ − 1 = 3. The next column uses 15, then 63.</div></div>
+<div class="q"><p class="q__stem">In double integration, the step sizes are given by:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>h=(b−a)/M, k=(d−c)/N</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>h=(b−a)/N, k=(d−c)/M</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>h=k always</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>None</span></button></li></ul><div class="q__why"><b>h=(b−a)/N, k=(d−c)/M.</b> h goes with the x-range and N; k goes with the y-range and M. Option A swaps them.</div></div>
+<div class="q"><p class="q__stem">Double integrals are evaluated by applying a one-dimensional rule:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>once</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>repeatedly, one variable at a time</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>only to x</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>only to y</span></button></li></ul><div class="q__why"><b>Repeatedly, one variable at a time</b> — integrate rows first, then integrate the results.</div></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="taylor">
+  <summary class="sec__head">
+    <span class="sec__num">12</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Taylor's series method for ODEs</span>
+      <span class="sec__meta"><span class="pill pill--mid">Worth knowing</span><span class="pill pill--low">Lecture 35</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--plain"><span class="box__label">In plain words</span><p>From here on, every section solves the same kind of problem: <b>you know the steepness rule and one starting point, and you must find where the curve goes.</b></p>
+<p>Taylor's method says: build the answer from the starting value plus corrections using the 1st, 2nd, 3rd… derivatives. Very accurate — but you have to <b>work out all those derivatives yourself</b>, which is the painful part.</p></div>
+
+<div class="slip slip--key"><span class="slip__tab">Taylor's series method</span><div class="slip__body">For &nbsp; dy/dt = f(t, y) &nbsp; with &nbsp; y(t₀) = y₀ :
+
+y(t) = y(t₀) + (t−t₀)·y′(t₀)
+&nbsp;&nbsp;&nbsp;&nbsp;+ [(t−t₀)²/2!]·y″(t₀)
+&nbsp;&nbsp;&nbsp;&nbsp;+ [(t−t₀)³/3!]·y‴(t₀)
+&nbsp;&nbsp;&nbsp;&nbsp;+ [(t−t₀)⁴/4!]·y⁗(t₀) + …</div></div>
+
+<h4>Getting the derivatives</h4>
+<p>You don't know y(t), so you get each derivative by <b>differentiating the ODE itself</b>:</p>
+<div class="slip"><span class="slip__tab">Derivative chain</span><div class="slip__body">y′ = f(t, y)
+y″ = f_x + f·f_y
+y‴ = f_xx + 2f·f_xy + f²·f_yy + f_y(f_x + f·f_y)</div></div>
+
+<h3>Worked example</h3>
+<p>Solve dy/dt = t + y, y(1) = 0. Find y(1.2) with h = 0.1.</p>
+<div class="steps"><div class="steps__head">Taylor's method, step by step<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Write down the first derivative and evaluate it</b><p>The ODE gives y′ directly. Put in t = 1, y = 0.</p><span class="math">y′ = t + y &nbsp;→&nbsp; y′(1) = 1 + 0 = <b>1</b></span></li><li><b>Step 2 — Differentiate the ODE to get y″</b><p>d/dt of (t + y) = 1 + y′. We already know y′(1) = 1.</p><span class="math">y″ = 1 + y′ &nbsp;→&nbsp; y″(1) = 1 + 1 = <b>2</b></span></li><li><b>Step 3 — Keep going for y‴ and y⁗</b><p>d/dt of (1 + y′) = y″, and it repeats from here.</p><span class="math">y‴ = y″ = <b>2</b> &nbsp;&nbsp; y⁗ = y‴ = <b>2</b></span></li><li><b>Step 4 — Work out (t − t₀)</b><p>We want t = 1.2, and we started at t₀ = 1.</p><span class="math">t − t₀ = 1.2 − 1 = <b>0.2</b></span></li><li><b>Step 5 — Substitute everything</b><p>Remember 2! = 2, 3! = 6, 4! = 24.</p><span class="math">y(1.2) = 0 + (0.2)(1) + (0.2²/2)(2)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ (0.2³/6)(2) + (0.2⁴/24)(2)</span></li><li><b>Step 6 — Compute each term</b><p>0.2² = 0.04, 0.2³ = 0.008, 0.2⁴ = 0.0016.</p><span class="math">= 0.2 + 0.04 + 0.002667 + 0.000133</span></li><li><b>Step 7 — Add up and check</b><p>The exact solution is y = 2e^(t−1) − t − 1, giving 0.24281. Excellent agreement.</p><span class="math"><b>y(1.2) ≈ 0.2428</b> &nbsp;(exact 0.24281 ✔)</span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<h3>Advantages and disadvantages</h3>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Advantage</th><th>Disadvantage</th></tr></thead><tbody><tr><td>Very accurate if enough terms are kept</td><td>Requires <b>higher-order derivatives</b> — laborious</td></tr><tr><td>Single-step, no starting values needed</td><td>Impractical when f(t,y) is complicated</td></tr><tr><td>Gives a function, not just points</td><td>New derivatives needed at every new point</td></tr></tbody></table></div>
+
+<div class="box box--exam"><span class="box__label">Exam alert</span><p><b>This is exactly why Runge–Kutta was invented:</b> RK achieves the same accuracy as Taylor <b>without ever computing a derivative of f</b>. That sentence is a repeated True/False and short question.</p></div>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">The main drawback of Taylor's series method is that it requires:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>many starting values</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>calculation of higher-order derivatives</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>equal spacing</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>matrix inversion</span></button></li></ul><div class="q__why"><b>Higher-order derivatives.</b> Option A describes the predictor–corrector methods, not Taylor.</div></div>
+<div class="q"><p class="q__stem">Taylor's series method is a:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>multi-step method</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>single-step method</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>predictor–corrector method</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>iterative matrix method</span></button></li></ul><div class="q__why"><b>Single-step</b> — it needs only the one starting point, so it is self-starting.</div></div>
+<div class="q"><p class="q__stem">In Runge–Kutta methods we do not need to calculate higher-order derivatives and we find greater accuracy.</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>TRUE</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>FALSE</span></button></li></ul><div class="q__why"><b>TRUE</b> — a verbatim past-paper item, and the whole reason RK replaced Taylor in practice.</div></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="euler">
+  <summary class="sec__head">
+    <span class="sec__num">13</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Euler's method & modified Euler</span>
+      <span class="sec__meta"><span class="pill pill--high">High yield</span><span class="pill pill--low">Lecture 36</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--plain"><span class="box__label">In plain words</span><p><b>Euler's method:</b> you are standing on the curve and you know its steepness right now. So you just walk in a <b>straight line</b> in that direction for a small step h, and pretend you are still on the curve. Repeat.</p>
+<p>It is the simplest possible idea, and also the least accurate — the curve bends away from your straight line.</p>
+<p><b>Modified Euler</b> fixes most of that: instead of using only the slope where you are, it <b>averages the slope at the start with the slope where you land</b>. Two slopes instead of one.</p></div>
+
+<div class="slip slip--key"><span class="slip__tab">Euler's method</span><div class="slip__body">yₙ₊₁ = yₙ + h·f(tₙ, yₙ)</div></div>
+<dl class="decoder"><dt>yₙ</dt><dd>the y value you already know</dd><dt>yₙ₊₁</dt><dd>the next y value — what you are finding</dd><dt>h</dt><dd>the step size</dd><dt>f(tₙ, yₙ)</dt><dd>the steepness at your current point — put your current t and y into the ODE</dd></dl>
+
+<div class="slip slip--key"><span class="slip__tab">Modified Euler's method</span><div class="slip__body"><b>Step 1 (Predictor — plain Euler):</b>
+y⁽⁰⁾ₙ₊₁ = yₙ + h·f(tₙ, yₙ)
+
+<b>Step 2 (Corrector — average the slopes):</b>
+y⁽¹⁾ₙ₊₁ = yₙ + (h/2)·[ f(tₙ, yₙ) + f(tₙ₊₁, y⁽⁰⁾ₙ₊₁) ]
+
+<b>Repeat step 2 as needed:</b>
+y⁽ʳ⁾ₙ₊₁ = yₙ + (h/2)[ f(tₙ, yₙ) + f(tₙ₊₁, y⁽ʳ⁻¹⁾ₙ₊₁) ]</div></div>
+<p>Stop iterating when two successive values agree to the accuracy you need.</p>
+
+<div class="box box--tip"><span class="box__label">Memory trick</span><p><b>The whole ODE chapter in one line:</b> Euler uses <b>one</b> slope. Modified Euler uses the <b>average of two</b>. Runge–Kutta 4 uses a <b>weighted average of four</b>. That progression is all you need to remember about how they relate.</p></div>
+
+<h3>Worked example — Euler's method</h3>
+<p>Solve dy/dx = x + y, y(0) = 1. Find y(0.2) with h = 0.1.</p>
+<div class="steps"><div class="steps__head">Euler, step by step<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Find the slope at the starting point</b><p>Put x = 0 and y = 1 into the ODE.</p><span class="math">f(0, 1) = 0 + 1 = <b>1</b></span></li><li><b>Step 2 — Take one Euler step</b><p>Current y, plus h times the slope.</p><span class="math">y₁ = 1 + (0.1)(1) = <b>1.1</b> &nbsp;(this is y at x = 0.1)</span></li><li><b>Step 3 — Find the slope at the NEW point</b><p>Now x = 0.1 and y = 1.1. Update <b>both</b>.</p><span class="math">f(0.1, 1.1) = 0.1 + 1.1 = <b>1.2</b></span></li><li><b>Step 4 — Take the second step</b><p>Same formula again, starting from 1.1.</p><span class="math">y₂ = 1.1 + (0.1)(1.2) = <b>1.22</b> &nbsp;(y at x = 0.2)</span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<h3>Worked example — Modified Euler</h3>
+<p>Same problem, one step to x = 0.1.</p>
+<div class="steps"><div class="steps__head">Modified Euler, step by step<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Predictor: do a plain Euler step first</b><p>This is only a rough guess. It gets improved next.</p><span class="math">y⁽⁰⁾₁ = 1 + (0.1)(1) = <b>1.1</b></span></li><li><b>Step 2 — Find the slope at that predicted point</b><p>Put x = 0.1 and the predicted y = 1.1 into the ODE.</p><span class="math">f(0.1, 1.1) = 0.1 + 1.1 = <b>1.2</b></span></li><li><b>Step 3 — Corrector: average the two slopes</b><p>Slope at the start was 1, slope at the end is 1.2. Average them, and note the <b>h/2</b>.</p><span class="math">y⁽¹⁾₁ = 1 + (0.1/2)[1 + 1.2]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 1 + 0.05(2.2) = <b>1.11</b></span></li><li><b>Step 4 — Iterate once more using the improved y</b><p>Feed 1.11 back in and repeat the corrector.</p><span class="math">f(0.1, 1.11) = 1.21<br>y⁽²⁾₁ = 1 + 0.05(1 + 1.21) = <b>1.1105</b></span></li><li><b>Step 5 — Iterate again to confirm it has settled</b><p>The value has stopped changing, so we stop.</p><span class="math">f(0.1, 1.1105) = 1.2105<br>y⁽³⁾₁ = 1 + 0.05(2.2105) = <b>1.11053</b> — converged</span></li><li><b>Step 6 — Compare with the exact answer</b><p>Exact: y = 2eˣ − x − 1 gives 1.11034. Modified Euler (1.1105) is far closer than plain Euler (1.1).</p><span class="math">Euler 1.1 &nbsp;|&nbsp; Modified Euler 1.1105 &nbsp;|&nbsp; Exact 1.11034</span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<div class="box box--trap"><span class="box__label">Common mistake</span><ol>
+<li>Using f(tₙ₊₁, <b>yₙ</b>) instead of f(tₙ₊₁, <b>y⁽⁰⁾ₙ₊₁</b>) in the corrector. You must use the <b>predicted</b> y.</li>
+<li>Forgetting the <b>h/2</b> and writing h instead.</li>
+<li>Forgetting to update <b>both</b> t and y at each step — students often advance y but leave t behind.</li>
+<li>Working in degrees when the ODE contains trig functions. <b>Always radians.</b></li>
+</ol></div>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">Euler's method is based on approximating the solution curve by its:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>chord</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>tangent</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>normal</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>secant</span></button></li></ul><div class="q__why"><b>Tangent.</b> Over a small interval the curve is nearly a straight line, so you follow the tangent at the known point.</div></div>
+<div class="q"><p class="q__stem">Euler's method has order of accuracy:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>O(h)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>O(h²)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>O(h³)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>O(h⁴)</span></button></li></ul><div class="q__why"><b>O(h)</b> — first order, the least accurate method in the course. Modified Euler is O(h²), RK4 is O(h⁴).</div></div>
+<div class="q"><p class="q__stem">In the modified Euler method, the slope used is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>the slope at tₙ</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>the slope at tₙ₊₁</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">C</span><span>the average of the slopes at tₙ and tₙ₊₁</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>zero</span></button></li></ul><div class="q__why"><b>The average of the two.</b> That averaging is exactly what lifts it from O(h) to O(h²).</div></div>
+<div class="q"><p class="q__stem">Solving y′ = x + y, y(0) = 1 by Euler's method with h = 0.1, y(0.1) is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>1.0</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>1.1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>1.11</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>1.2</span></button></li></ul><div class="q__why"><b>1.1.</b> y₁ = 1 + 0.1(0+1) = 1.1. Note option C (1.11) is the <b>Modified</b> Euler answer — a deliberate trap.</div></div>
+<div class="q"><p class="q__stem">The solution of dy/dt = f(t,y) is represented as a curve in the:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>xy-plane</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>ty-plane</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>xt-plane</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>None</span></button></li></ul><div class="q__why"><b>ty-plane</b>, because the independent variable here is t and the dependent variable is y.</div></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="rk">
+  <summary class="sec__head">
+    <span class="sec__num">14</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Runge–Kutta methods</span>
+      <span class="sec__meta"><span class="pill pill--must">Must know</span><span class="pill pill--low">Lectures 37–38</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--exam"><span class="box__label">Exam alert</span><p><b>Guaranteed exam content.</b> The four k-formulas appear as MCQs almost every semester, and RK4 is the most common ODE numerical.</p></div>
+
+<div class="box box--plain"><span class="box__label">In plain words</span><p>Euler used one slope and was inaccurate. Modified Euler used two and was better. <b>Runge–Kutta 4 uses four slopes</b>, sampled at cleverly chosen points inside the step, and takes a weighted average.</p>
+<p>Think of it as: peek at the slope at the start, peek twice in the middle, peek at the end, then take a smart average of all four peeks. The middle ones count double because they represent the step best.</p>
+<p><b>Its big advantage:</b> it is as accurate as Taylor's method but you <b>never have to differentiate anything</b>.</p></div>
+
+<h3>Second-order Runge–Kutta</h3>
+<div class="slip"><span class="slip__tab">RK2</span><div class="slip__body">yₙ₊₁ = yₙ + ½(k₁ + k₂)
+
+k₁ = h·f(tₙ, yₙ)
+k₂ = h·f(tₙ + h, yₙ + k₁)</div></div>
+<p>This is algebraically identical to the Modified Euler method.</p>
+<p><b>Alternative RK2 form used in the handouts:</b> yₙ₊₁ = yₙ + (1/3)(2k₁ + k₂), with k₁ = h·f(xₙ,yₙ) and k₂ = h·f(xₙ + (3/2)h, yₙ + (3/2)k₁).</p>
+
+<h3>🔴 Fourth-order Runge–Kutta (RK4) — memorise this exactly</h3>
+<div class="slip slip--key"><span class="slip__tab">RK4</span><div class="slip__body">yₙ₊₁ = yₙ + (1/6)·( k₁ + 2k₂ + 2k₃ + k₄ )
+
+where
+
+k₁ = h·f( tₙ,       yₙ )
+k₂ = h·f( tₙ + h/2, yₙ + k₁/2 )
+k₃ = h·f( tₙ + h/2, yₙ + k₂/2 )
+k₄ = h·f( tₙ + h,   yₙ + k₃ )</div></div>
+
+<div class="tablewrap"><table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody><tr><td>Function evaluations per step</td><td><b>4</b></td></tr><tr><td>Accuracy</td><td><b>O(h⁴)</b></td></tr><tr><td>Type</td><td>Single-step, self-starting</td></tr><tr><td>Weights</td><td><b>1 : 2 : 2 : 1, divided by 6</b></td></tr></tbody></table></div>
+
+<div class="box box--tip"><span class="box__label">Memory trick</span><p><b>Memory chant:</b> “<b>k₁ at the start, k₂ and k₃ at the middle, k₄ at the end — one, two, two, one, over six.</b>”</p>
+<p><b>The half-step pattern:</b> k₂ and k₃ have halves in <b>both</b> slots (h/2 and k/2). k₄ has <b>no halves at all</b> — full h, full k₃.</p></div>
+
+<h3>Worked example — RK4</h3>
+<p>Solve dy/dx = x + y, y(0) = 1. Find y(0.1) with h = 0.1.</p>
+<div class="steps"><div class="steps__head">RK4, step by step — do these in strict order<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Write down what you have</b><p>Never skip this. Half of RK4 errors come from losing track of the numbers.</p><span class="math">f(x,y) = x + y &nbsp; h = 0.1 &nbsp; x₀ = 0 &nbsp; y₀ = 1</span></li><li><b>Step 2 — Compute k₁ (slope at the start)</b><p>Straight substitution: x = 0, y = 1.</p><span class="math">k₁ = 0.1·f(0, 1) = 0.1(0 + 1) = <b>0.1</b></span></li><li><b>Step 3 — Compute k₂ (first middle slope)</b><p>Move x forward by h/2 = 0.05, and y forward by k₁/2 = 0.05.</p><span class="math">k₂ = 0.1·f(0.05, 1.05)<br>&nbsp;&nbsp;&nbsp;= 0.1(0.05 + 1.05) = 0.1(1.1) = <b>0.11</b></span></li><li><b>Step 4 — Compute k₃ (second middle slope)</b><p>Same x as k₂, but now y moves by <b>k₂</b>/2 = 0.055. This is where students mistakenly reuse k₁.</p><span class="math">k₃ = 0.1·f(0.05, 1.055)<br>&nbsp;&nbsp;&nbsp;= 0.1(0.05 + 1.055) = 0.1(1.105) = <b>0.1105</b></span></li><li><b>Step 5 — Compute k₄ (slope at the end)</b><p>Full step now — no halves. x + h, and y + k₃.</p><span class="math">k₄ = 0.1·f(0.1, 1.1105)<br>&nbsp;&nbsp;&nbsp;= 0.1(0.1 + 1.1105) = 0.1(1.2105) = <b>0.12105</b></span></li><li><b>Step 6 — Combine with weights 1, 2, 2, 1</b><p>Middle two are doubled. Then divide the whole bracket by 6.</p><span class="math">y₁ = 1 + (1/6)[0.1 + 2(0.11) + 2(0.1105) + 0.12105]<br>&nbsp;&nbsp;&nbsp;= 1 + (1/6)[0.1 + 0.22 + 0.221 + 0.12105]</span></li><li><b>Step 7 — Finish</b><p>Add the bracket, divide by 6, add to y₀.</p><span class="math">= 1 + (1/6)(0.66205) = 1 + 0.110342 = <b>1.110342</b></span></li><li><b>Step 8 — Check against exact</b><p>Exact answer is 1.1103418. RK4 matched it to six decimal places in a single step. That is why it is the standard method.</p><span class="math">RK4 = 1.110342 &nbsp; Exact = 1.1103418 ✔</span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+
+<h3>RK for a system of equations</h3>
+<p>For dy/dt = f(t,y,z) and dz/dt = g(t,y,z), compute <b>k's for y and l's for z simultaneously</b> at each stage:</p>
+<div class="slip"><span class="slip__tab">RK4 for a system</span><div class="slip__body">k₁ = h·f(tₙ, yₙ, zₙ) &nbsp;&nbsp; l₁ = h·g(tₙ, yₙ, zₙ)
+
+k₂ = h·f(tₙ+h/2, yₙ+k₁/2, zₙ+l₁/2)
+l₂ = h·g(tₙ+h/2, yₙ+k₁/2, zₙ+l₁/2)
+
+… and so on, then update BOTH y and z with 1:2:2:1</div></div>
+<div class="box box--trap"><span class="box__label">Common mistake</span><p>You must advance <b>both</b> variables together at every stage. Never finish all of y first and then go back and do z — the values feed into each other.</p></div>
+
+<div class="box box--trap"><span class="box__label">Common mistake</span><ol>
+<li>Forgetting the <b>h</b> in kᵢ = <b>h</b>·f(…). The k values already include h — then dividing by h again is a classic double error.</li>
+<li>Using k₁ instead of k₂ inside k₃.</li>
+<li>Writing k₄ = h·f(tₙ + h/2, yₙ + k₃/2). <b>k₄ uses full steps, no halves.</b></li>
+<li>Dividing by 4 instead of <b>6</b>. (The weights sum to 1+2+2+1 = 6.)</li>
+</ol></div>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">In fourth-order Runge–Kutta method, k₁ is given by:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>k₁ = h·f(xₙ, yₙ)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>k₁ = 2h·f(xₙ,yₙ)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>k₁ = 3h·f(xₙ,yₙ)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>k₁ = f(xₙ,yₙ)</span></button></li></ul><div class="q__why"><b>h·f(xₙ, yₙ).</b> Note option D drops the h — that is the trap. Every k includes h.</div></div>
+<div class="q"><p class="q__stem">In fourth-order Runge–Kutta method, k₂ is given by:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>k₂ = h·f(xₙ + h/2, yₙ + k₁/2)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>k₂ = h·f(xₙ + h/3, yₙ + k₁/3)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>k₂ = h·f(xₙ+h, yₙ+k₁)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>None</span></button></li></ul><div class="q__why"><b>h·f(xₙ + h/2, yₙ + k₁/2).</b> Halves in both slots. Option B uses thirds (that belongs to a different RK variant), option C is the RK2 form.</div></div>
+<div class="q"><p class="q__stem">In fourth-order Runge–Kutta method, k₄ is given by:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>k₄ = h·f(xₙ+2h, yₙ+2k₃)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>k₄ = h·f(xₙ−h, yₙ−k₃)</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">C</span><span>k₄ = h·f(xₙ+h, yₙ+k₃)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>None</span></button></li></ul><div class="q__why"><b>h·f(xₙ+h, yₙ+k₃).</b> Full step, full k₃ — no halves and no doubling.</div></div>
+<div class="q"><p class="q__stem">The fourth-order RK method requires how many function evaluations per step?</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>2</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>3</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">D</span><span>4</span></button></li></ul><div class="q__why"><b>4</b> — one for each of k₁, k₂, k₃, k₄. That extra cost is what buys the O(h⁴) accuracy.</div></div>
+<div class="q"><p class="q__stem">In RK4, the final combination is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>(k₁+k₂+k₃+k₄)/4</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>(k₁+2k₂+2k₃+k₄)/6</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>(2k₁+k₂+k₃+2k₄)/6</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>(k₁+k₄)/2</span></button></li></ul><div class="q__why"><b>(k₁+2k₂+2k₃+k₄)/6.</b> Option A is a plain average (wrong — the middle slopes must count double). Option C doubles the wrong pair.</div></div>
+<div class="q"><p class="q__stem">Runge–Kutta methods are ___ methods.</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>single-step (self-starting)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>multi-step</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>predictor–corrector</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>iterative matrix</span></button></li></ul><div class="q__why"><b>Single-step.</b> RK needs only the previous point, which is exactly why it is used to <i>start</i> the multi-step methods.</div></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="pc">
+  <summary class="sec__head">
+    <span class="sec__num">15</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Predictor–corrector methods (Milne & Adams–Moulton)</span>
+      <span class="sec__meta"><span class="pill pill--high">High yield</span><span class="pill pill--low">Lectures 39–40</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--plain"><span class="box__label">In plain words</span><p>All the methods so far only looked at <b>where you are now</b>. Predictor–corrector methods look at <b>the last four points</b> as well — more information, better answer.</p>
+<p>They work in two moves:</p>
+<ol>
+<li><b>Predict</b> — make a first guess at the next value using the past points.</li>
+<li><b>Correct</b> — feed that guess back in to get a much better value.</li>
+</ol>
+<p><b>The catch:</b> you need four points before you can even start. So you generate the first four with RK4, then switch over.</p></div>
+
+<h3>Single-step vs multi-step</h3>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th></th><th>Single-step</th><th>Multi-step (P–C)</th></tr></thead><tbody><tr><td>To find yₙ₊₁ you need</td><td><b>only yₙ</b></td><td>yₙ, yₙ₋₁, yₙ₋₂, yₙ₋₃</td></tr><tr><td>Self-starting?</td><td><b>Yes</b></td><td><b>No</b> — needs 4 starting values</td></tr><tr><td>Examples</td><td>Taylor, Euler, Modified Euler, <b>RK</b></td><td><b>Milne</b>, <b>Adams–Moulton</b></td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+<div class="box box--exam"><span class="box__label">Exam alert</span><p><b>Repeated short question:</b> “Why is a Runge–Kutta method used to start a predictor–corrector method?”<br><b>Answer:</b> because Milne and Adams–Moulton need four past values, and RK4 is self-starting, so it can generate those four from the single initial condition.</p></div>
+
+<h4>The simplest P–C pair (Euler + Modified Euler)</h4>
+<div class="slip"><span class="slip__tab">Simple P–C pair</span><div class="slip__body">P: y⁽⁰⁾ₙ₊₁ = yₙ + h·f(tₙ, yₙ)
+C: y⁽¹⁾ₙ₊₁ = yₙ + (h/2)[ f(tₙ,yₙ) + f(tₙ₊₁, y⁽⁰⁾ₙ₊₁) ]
+
+Improved predictor (quadratic through 3 points):
+P: yₙ₊₁ = yₙ₋₁ + 2h·f(tₙ, yₙ)</div></div>
+
+<h3>⭐ Milne's predictor–corrector method</h3>
+<div class="slip slip--key"><span class="slip__tab">Milne's P–C pair</span><div class="slip__body"><b>Predictor:</b>
+yₙ₊₁ = yₙ₋₃ + (4h/3)·( 2y′ₙ₋₂ − y′ₙ₋₁ + 2y′ₙ )
+
+<b>Corrector:</b>
+yₙ₊₁ = yₙ₋₁ + (h/3)·( y′ₙ₋₁ + 4y′ₙ + y′ₙ₊₁ )</div></div>
+
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Item</th><th>Detail</th></tr></thead><tbody><tr><td>Derived from</td><td><b>Newton's FORWARD difference formula</b></td></tr><tr><td>Predictor obtained by</td><td>integrating from t₀ to <b>t₄</b> (4 intervals)</td></tr><tr><td>Corrector obtained by</td><td>integrating from t₀ to <b>t₂</b> (2 intervals)</td></tr><tr><td>Predictor truncation error</td><td>(28/90)·h·Δ⁴y′₀</td></tr><tr><td>Corrector truncation error</td><td>−(1/90)·h·Δ⁴y′₀</td></tr><tr><td>Starting values needed</td><td><b>4</b></td></tr></tbody></table></div>
+
+<div class="box box--tip"><span class="box__label">Memory trick</span><p><b>Recognise the corrector:</b> (h/3)(y′ + 4y′ + y′) is <b>exactly Simpson's 1/3 rule</b> applied to the derivative. That is not a coincidence — it <i>is</i> Simpson's rule.<br><b>Coefficients:</b> predictor 2, −1, 2 with 4h/3. Corrector 1, 4, 1 with h/3.</p></div>
+
+<h3>⭐ Adams–Moulton predictor–corrector method</h3>
+<div class="slip slip--key"><span class="slip__tab">Adams–Moulton P–C pair</span><div class="slip__body"><b>Predictor:</b>
+yₙ₊₁ = yₙ + (h/24)·( 55y′ₙ − 59y′ₙ₋₁ + 37y′ₙ₋₂ − 9y′ₙ₋₃ )
+
+<b>Corrector:</b>
+yₙ₊₁ = yₙ + (h/24)·( 9y′ₙ₊₁ + 19y′ₙ − 5y′ₙ₋₁ + y′ₙ₋₂ )</div></div>
+
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Item</th><th>Detail</th></tr></thead><tbody><tr><td>Derived from</td><td><b>Newton's BACKWARD difference formula</b></td></tr><tr><td>Predictor coefficients</td><td><b>55, −59, 37, −9</b> over 24</td></tr><tr><td>Corrector coefficients</td><td><b>9, 19, −5, 1</b> over 24</td></tr><tr><td>Corrector truncation error</td><td>−(19/720)·h·∇⁴y′ₙ₊₁</td></tr><tr><td>Predictor vs corrector error</td><td>predictor ≈ <b>13× larger</b>, <b>opposite sign</b></td></tr><tr><td>Starting values needed</td><td><b>4</b></td></tr></tbody></table></div>
+
+<div class="box box--tip"><span class="box__label">Memory trick</span><p><b>A checksum that saves you in the exam:</b> the coefficients must add up to the denominator.</p>
+<p>Predictor: 55 − 59 + 37 − 9 = <b>24</b> ✔<br>
+Corrector: 9 + 19 − 5 + 1 = <b>24</b> ✔</p>
+<p>If your recalled numbers do not sum to 24, you have mis-remembered one. Use this before you write the final answer.</p></div>
+
+<div class="box box--exam"><span class="box__label">Exam alert</span><p><b>The single most repeated MCQ in this section:</b></p>
+<p>“Adam–Moulton P–C method is derived by employing: <b>Newton's backward difference interpolation formula</b>” ✅</p>
+<p>And by contrast, <b>Milne's method uses Newton's FORWARD difference formula.</b></p>
+<p>Learn them as a <b>contrasting pair</b> — VU tests exactly this confusion. <b>M</b>ilne = <b>forward</b>, <b>A</b>dams = backward. (Or: they are alphabetically opposite to what you would guess, which is itself a memory hook.)</p></div>
+
+<h3>Worked example — Milne's predictor</h3>
+<p>Given the table, predict y at x = 0.4 with h = 0.1:</p>
+<div class="tablewrap"><table><thead><tr><th>x</th><th>0</th><th>0.1</th><th>0.2</th><th>0.3</th><th>0.4</th></tr></thead><tbody><tr><td>y</td><td>1</td><td>1.1103</td><td>1.2428</td><td>1.3997</td><td>1.5836</td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+<div class="steps"><div class="steps__head">Milne's predictor, step by step<span class="steps__count"></span></div><ul class="steps__list"><li><b>Step 1 — Identify which point is which</b><p>We want y₄, so n+1 = 4, meaning n = 3.</p><span class="math">yₙ₋₃ = y₀ = 1<br>The derivatives we need are at x = 0.1, 0.2, 0.3</span></li><li><b>Step 2 — Compute the three derivative values</b><p>Put each (x, y) pair into the ODE you were given. These are y′₁, y′₂, y′₃.</p><span class="math">y′₁ = f(0.1, 1.1103)<br>y′₂ = f(0.2, 1.2428)<br>y′₃ = f(0.3, 1.3997)</span></li><li><b>Step 3 — Write the predictor formula BEFORE substituting</b><p>Marks are given for the formula itself, so always write it out.</p><span class="math">y₄ = y₀ + (4h/3)·( 2y′₁ − y′₂ + 2y′₃ )</span></li><li><b>Step 4 — Substitute and compute</b><p>4h/3 = 4(0.1)/3 = 0.13333. Note the middle term is subtracted.</p><span class="math">y₄ = 1 + 0.13333·( 2y′₁ − y′₂ + 2y′₃ )</span></li></ul><div class="steps__foot"><button class="btn steps__next" type="button">Show first step</button><button class="btn btn--ghost steps__all" type="button">Show all steps</button></div></div>
+<div class="box box--exam"><span class="box__label">Exam alert</span><p><b>Method note:</b> the exam almost always gives you the ODE alongside the table. Compute the three derivative values first and list them clearly, <b>then</b> substitute. Marks are for the substitution, so show the formula before plugging numbers in.</p></div>
+
+<div class="box box--trap"><span class="box__label">Common mistake</span><ol>
+<li>Using yₙ₋₁ instead of <b>yₙ₋₃</b> in Milne's predictor.</li>
+<li>Mixing up the base points: <b>Milne's predictor starts from yₙ₋₃, its corrector from yₙ₋₁. Adams–Moulton starts from yₙ for BOTH.</b></li>
+<li>Using 4h/3 for the corrector — it is <b>h/3</b>.</li>
+<li>Forgetting that y′ means <b>f(x, y)</b> evaluated at that point, not a difference.</li>
+<li>Attempting Milne or Adams with fewer than 4 starting values.</li>
+</ol></div>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">Adam–Moulton P–C method is derived by employing:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>Newton's backward difference interpolation formula</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>Newton's forward difference interpolation formula</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>Newton's divided difference formula</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>None</span></button></li></ul><div class="q__why"><b>Backward.</b> This is the most repeated MCQ in the ODE chapter. Milne is the forward one — do not swap them.</div></div>
+<div class="q"><p class="q__stem">Milne's method is derived by employing:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>Newton's backward formula</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>Newton's forward formula</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>Lagrange's formula</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>Taylor's series</span></button></li></ul><div class="q__why"><b>Forward.</b> The exact mirror of the Adams–Moulton question — VU asks both versions.</div></div>
+<div class="q"><p class="q__stem">Milne's predictor formula is:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>yₙ₊₁ = yₙ₋₁ + (h/3)(y′ₙ₋₁+4y′ₙ+y′ₙ₊₁)</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>yₙ₊₁ = yₙ₋₃ + (4h/3)(2y′ₙ₋₂ − y′ₙ₋₁ + 2y′ₙ)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>yₙ₊₁ = yₙ + h·f(tₙ,yₙ)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>None</span></button></li></ul><div class="q__why"><b>Option B.</b> Option A is the <b>corrector</b>, not the predictor — that is the trap. Option C is Euler.</div></div>
+<div class="q"><p class="q__stem">In the Adams–Moulton predictor, the coefficients are:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>9, 19, −5, 1</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>55, −59, 37, −9</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>2, −1, 2</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>1, 4, 1</span></button></li></ul><div class="q__why"><b>55, −59, 37, −9.</b> Option A is the <b>corrector</b>. Both sets sum to 24 — use that checksum.</div></div>
+<div class="q"><p class="q__stem">Predictor–corrector methods are:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>single-step</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>multi-step</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>self-starting</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>direct</span></button></li></ul><div class="q__why"><b>Multi-step</b> — they need four past points, which is exactly why they are <i>not</i> self-starting.</div></div>
+<div class="q"><p class="q__stem">The truncation error in Adams' predictor compared with the corrector is approximately:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>equal</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>13 times larger, with opposite sign</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>90 times larger</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>smaller</span></button></li></ul><div class="q__why"><b>13 times larger, opposite sign.</b> Which is precisely why the corrector step is worth doing.</div></div>
+<div class="q"><p class="q__stem">Milne's corrector formula is essentially:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>Trapezoidal rule</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>Simpson's 1/3 rule</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>Simpson's 3/8 rule</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>Euler's method</span></button></li></ul><div class="q__why"><b>Simpson's 1/3 rule.</b> Look at the shape: (h/3)(1, 4, 1). Identical pattern.</div></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="carryover">
+  <summary class="sec__head">
+    <span class="sec__num">16</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Carry-over topics: root-finding, matrices, MAPLE</span>
+      <span class="sec__meta"><span class="pill pill--low">Light touch</span><span class="pill pill--low">Lectures 43–45</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--plain"><span class="box__label">In plain words</span><p>These topics come from the <b>first half</b> of the course, but Lectures 43–45 revisit them — and they leak heavily into the final paper's True/False block. Spend 10 minutes here; it is cheap marks.</p></div>
+
+<h3>Root-finding methods (Lectures 44–45)</h3>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Method</th><th>Formula</th><th>Starting points</th><th>Type</th></tr></thead><tbody><tr><td><b>Bisection</b></td><td>x₂ = (x₀+x₁)/2</td><td><b>2</b> (with f(x₀)·f(x₁) &lt; 0)</td><td>Bracketing</td></tr><tr><td><b>Regula-Falsi</b></td><td>xₙ₊₁ = xₙ − f(xₙ)(xₙ−xₙ₋₁)/(f(xₙ)−f(xₙ₋₁))</td><td><b>2</b> (opposite signs)</td><td>Bracketing</td></tr><tr><td><b>Iteration</b></td><td>xₙ₊₁ = φ(xₙ)</td><td><b>1</b></td><td>Open</td></tr><tr><td><b>Newton–Raphson</b></td><td>xₙ₊₁ = xₙ − f(xₙ)/f′(xₙ)</td><td><b>1</b></td><td>Open</td></tr><tr><td><b>Secant</b></td><td>xₙ₊₁ = [xₙ₋₁f(xₙ) − xₙf(xₙ₋₁)]/[f(xₙ)−f(xₙ₋₁)]</td><td><b>2</b></td><td>Open</td></tr><tr><td><b>Muller's</b></td><td>fits a quadratic through 3 points</td><td><b>3</b> 🔴</td><td>Open</td></tr><tr><td><b>Graeffe's</b></td><td>repeated squaring of the polynomial</td><td><b>0</b></td><td>Direct</td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+
+<h4>High-yield one-liners</h4>
+<ul>
+<li><b>Muller's method requires 3 starting points.</b> Appears verbatim in past finals.</li>
+<li><b>Newton–Raphson converges quadratically</b> (order 2). Condition: |f(x)·f″(x)| &lt; |f′(x)|².</li>
+<li><b>Secant order of convergence = (1+√5)/2 ≈ 1.618</b> — faster than linear, slower than Newton.</li>
+<li>Newton–Raphson is also called the <b>method of tangents</b>.</li>
+<li><b>Direct methods</b> (no initial guess needed): Graeffe's root squaring, Gauss elimination, Gauss–Jordan.</li>
+<li><b>Iterative methods</b> (need an initial guess): Bisection, Newton–Raphson, Secant, Jacobi, Gauss–Seidel.</li>
+<li><b>Newton–Raphson fails when f′(x) = 0</b> near the root — use Regula-Falsi instead.</li>
+<li>All trigonometric calculations in <b>RADIANS</b>.</li>
+</ul>
+
+<h3>Matrix & eigenvalue True/False bank</h3>
+<p>These dominate the objective section. Every one below is <b>TRUE</b> as stated:</p>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Statement</th><th>Answer</th></tr></thead><tbody><tr><td>The determinant of a <b>diagonal</b> matrix is the product of the diagonal elements</td><td>TRUE</td></tr><tr><td>Power method is applicable if the eigenvectors are <b>linearly independent</b></td><td>TRUE</td></tr><tr><td>A 3×3 identity matrix has three and <b>same</b> eigenvalues</td><td>TRUE (all = 1)</td></tr><tr><td>If A and B are <b>similar</b>, they have the <b>same</b> eigenvalues</td><td>TRUE</td></tr><tr><td>Jacobi's method works on a matrix with <b>no</b> zeros along its main diagonal</td><td>TRUE</td></tr><tr><td>An eigenvector is <b>normalized</b> if its largest-magnitude coordinate = <b>unity</b></td><td>TRUE</td></tr><tr><td>Eigenvalues of a <b>symmetric</b> matrix are all <b>real</b></td><td>TRUE</td></tr><tr><td>Jacobi iteration converges if A is <b>strictly diagonally dominant</b></td><td>TRUE</td></tr><tr><td>Gauss–Seidel applies to diagonally dominant or symmetric positive definite A</td><td>TRUE</td></tr><tr><td>The <b>Power method</b> finds only the eigenvalue <b>largest in absolute value</b></td><td>TRUE</td></tr><tr><td>Iterative algorithms can be more rapid than direct methods</td><td>TRUE</td></tr><tr><td>If λ is an eigenvalue of A with eigenvector V, then <b>λ − a</b> is an eigenvalue of <b>A − aI</b></td><td>TRUE</td></tr><tr><td>To find the <b>smallest</b> eigenvalue, apply the Power method to <b>A⁻¹</b></td><td>TRUE</td></tr><tr><td>A matrix is <b>orthogonal</b> if AᵀA = I, i.e. Aᵀ = A⁻¹</td><td>TRUE</td></tr><tr><td>Octal number system has base <b>8</b></td><td>TRUE</td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+<div class="box box--exam"><span class="box__label">Exam alert</span><p><b>Watch the sign-flip trap:</b> VU also prints the <i>false</i> version of some of these — e.g. “If A and B are similar, they have the <b>different</b> eigenvalues” → that one is <b>FALSE</b>. Read the statement carefully; do not pattern-match on the topic alone.</p></div>
+
+<h3>MAPLE (Lecture 43)</h3>
+<p>Barely tested. Worth knowing only:</p>
+<ul>
+<li>MAPLE is a <b>computer algebra system</b> that does both <b>symbolic</b> and <b>numerical</b> mathematics.</li>
+<li>Commands end with a <b>semicolon (;)</b> to display output, or a <b>colon (:)</b> to suppress it.</li>
+<li>It can solve equations, differentiate, integrate and plot.</li>
+</ul>
+
+<h3>Practice questions</h3>
+<div class="q"><p class="q__stem">Muller's method requires how many starting points?</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>1</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>2</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">C</span><span>3</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>4</span></button></li></ul><div class="q__why"><b>3.</b> It fits a quadratic (parabola), and a parabola needs three points to be pinned down.</div></div>
+<div class="q"><p class="q__stem">Eigenvalues of a symmetric matrix are all:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="1"><span class="k">A</span><span>real</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">B</span><span>complex</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>zero</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>positive</span></button></li></ul><div class="q__why"><b>Real.</b> Note option D — symmetric does not mean positive, only real.</div></div>
+<div class="q"><p class="q__stem">The Power method can be used to find which eigenvalue?</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>the smallest</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>the dominant (largest in absolute value)</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>all of them</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>only zero eigenvalues</span></button></li></ul><div class="q__why"><b>The dominant one.</b> For the smallest, apply the Power method to A⁻¹ instead — the inverse has reciprocal eigenvalues.</div></div>
+<div class="q"><p class="q__stem">Newton–Raphson method is also known as the:</p><ul class="q__opts"><li><button class="q__opt" type="button" data-correct="0"><span class="k">A</span><span>method of chords</span></button></li><li><button class="q__opt" type="button" data-correct="1"><span class="k">B</span><span>method of tangents</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">C</span><span>method of bisection</span></button></li><li><button class="q__opt" type="button" data-correct="0"><span class="k">D</span><span>method of averages</span></button></li></ul><div class="q__why"><b>Method of tangents</b> — it follows the tangent line down to the x-axis at each step.</div></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="formulas">
+  <summary class="sec__head">
+    <span class="sec__num">17</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Master formula sheet</span>
+      <span class="sec__meta"><span class="pill pill--must">Must know</span><span class="pill pill--low">All lectures</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--plain"><span class="box__label">In plain words</span><p>Every formula in the syllabus, on one page. If you only have twenty minutes left, read this and Section 18.</p></div>
+
+<h3>Operators</h3>
+<div class="slip slip--key"><span class="slip__tab">Operators</span><div class="slip__body"><b>Δ = E − 1</b> &nbsp;|&nbsp; <b>∇ = 1 − E⁻¹</b> &nbsp;|&nbsp; <b>δ = E^½ − E^−½</b>
+<b>μ = ½(E^½ + E^−½)</b> &nbsp;|&nbsp; <b>E = e^(hD)</b>
+<b>hD = log(1+Δ) = −log(1−∇)</b>
+<b>Δ − ∇ = Δ∇ = δ²</b> &nbsp;|&nbsp; <b>μ² = 1 + δ²/4</b> &nbsp;|&nbsp; <b>E^½ = μ + δ/2</b>
+Eⁿf(x) = f(x+nh) &nbsp;|&nbsp; E⁻¹f(x) = f(x−h)</div></div>
+
+<h3>Interpolation</h3>
+<div class="slip slip--key"><span class="slip__tab">Interpolation</span><div class="slip__body"><b>Newton Forward</b> &nbsp;p = (x−x₀)/h
+y₀ + pΔy₀ + [p(p−1)/2!]Δ²y₀ + [p(p−1)(p−2)/3!]Δ³y₀ + …
+
+<b>Newton Backward</b> &nbsp;p = (x−xₙ)/h
+yₙ + p∇yₙ + [p(p+1)/2!]∇²yₙ + [p(p+1)(p+2)/3!]∇³yₙ + …
+
+<b>Lagrange</b>&nbsp; f(x) = Σ Lₖ(x)yₖ,&nbsp; Lₖ = Π(x−xᵢ)/(xₖ−xᵢ), i≠k
+
+<b>Newton Divided Difference</b>
+y[x₀] + (x−x₀)y[x₀,x₁] + (x−x₀)(x−x₁)y[x₀,x₁,x₂] + …
+
+<b>Link</b>&nbsp; y[x₀,…,xₙ] = Δⁿy₀/(n!hⁿ)
+<b>Error</b>&nbsp; E(x) = [Π(x−xᵢ)/(n+1)!]·y⁽ⁿ⁺¹⁾(ξ)</div></div>
+
+<h3>Differentiation</h3>
+<div class="slip slip--key"><span class="slip__tab">Differentiation</span><div class="slip__body">y′₀ = (1/h)[Δy₀ − Δ²y₀/2 + Δ³y₀/3 − Δ⁴y₀/4 + …]
+y″₀ = (1/h²)[Δ²y₀ − Δ³y₀ + (11/12)Δ⁴y₀ − (5/6)Δ⁵y₀ + …]
+y′ₙ = (1/h)[∇yₙ + ∇²yₙ/2 + ∇³yₙ/3 + …]
+y″ₙ = (1/h²)[∇²yₙ + ∇³yₙ + (11/12)∇⁴yₙ + …]
+
+<b>Two-point (central):</b>&nbsp; y′ᵢ = (yᵢ₊₁ − yᵢ₋₁)/2h
+<b>Three-point (central):</b> y″ᵢ = (yᵢ₊₁ − 2yᵢ + yᵢ₋₁)/h²
+<b>Five-point:</b> f′(x₀) = [f(x₀−2h) − 8f(x₀−h) + 8f(x₀+h) − f(x₀+2h)]/12h
+
+<b>Richardson:</b> Fₘ = [4ᵐFₘ₋₁(h/2ᵐ) − Fₘ₋₁(h/2^(m−1))]/(4ᵐ−1)</div></div>
+
+<h3>Integration</h3>
+<div class="slip slip--key"><span class="slip__tab">Integration</span><div class="slip__body"><b>h = (b−a)/n</b> &nbsp;&nbsp; n = (points) − 1
+
+<b>Trapezoidal:</b> (h/2)[y₀ + 2(y₁+…+yₙ₋₁) + yₙ] &nbsp;— any n
+<b>Simpson 1/3:</b> (h/3)[y₀ + 4(odd) + 2(even) + yₙ] &nbsp;— n EVEN
+<b>Simpson 3/8:</b> (3h/8)[y₀ + 3(y₁+y₂) + 2y₃ + … + yₙ] — n ×3
+
+<b>Romberg:</b> I_(T,m) = [4ᵐI_(T,m−1)(h/2ᵐ) − I_(T,m−1)(h/2^(m−1))]/(4ᵐ−1)</div></div>
+
+<h3>ODEs</h3>
+<div class="slip slip--key"><span class="slip__tab">ODEs</span><div class="slip__body"><b>Euler:</b> yₙ₊₁ = yₙ + h·f(tₙ,yₙ)
+<b>Modified Euler:</b> yₙ₊₁ = yₙ + (h/2)[f(tₙ,yₙ) + f(tₙ₊₁, y⁽⁰⁾ₙ₊₁)]
+<b>RK2:</b> yₙ₊₁ = yₙ + ½(k₁+k₂)
+
+<b>RK4:</b> yₙ₊₁ = yₙ + (k₁ + 2k₂ + 2k₃ + k₄)/6
+&nbsp;&nbsp;k₁ = hf(tₙ, yₙ)
+&nbsp;&nbsp;k₂ = hf(tₙ+h/2, yₙ+k₁/2)
+&nbsp;&nbsp;k₃ = hf(tₙ+h/2, yₙ+k₂/2)
+&nbsp;&nbsp;k₄ = hf(tₙ+h,   yₙ+k₃)
+
+<b>Milne P:</b> yₙ₊₁ = yₙ₋₃ + (4h/3)(2y′ₙ₋₂ − y′ₙ₋₁ + 2y′ₙ)
+<b>Milne C:</b> yₙ₊₁ = yₙ₋₁ + (h/3)(y′ₙ₋₁ + 4y′ₙ + y′ₙ₊₁)
+<b>Adams P:</b> yₙ₊₁ = yₙ + (h/24)(55y′ₙ − 59y′ₙ₋₁ + 37y′ₙ₋₂ − 9y′ₙ₋₃)
+<b>Adams C:</b> yₙ₊₁ = yₙ + (h/24)(9y′ₙ₊₁ + 19y′ₙ − 5y′ₙ₋₁ + y′ₙ₋₂)</div></div>
+
+<h3>Conditions & restrictions</h3>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Rule</th><th>Condition</th></tr></thead><tbody><tr><td>Δ, ∇, δ formulas</td><td><b>Equally spaced</b> data required</td></tr><tr><td>Lagrange &amp; Divided Differences</td><td>Work for <b>unequally spaced</b> data</td></tr><tr><td>Simpson's 1/3</td><td>n <b>even</b></td></tr><tr><td>Simpson's 3/8</td><td>n <b>multiple of 3</b></td></tr><tr><td>Trapezoidal</td><td><b>any</b> n</td></tr><tr><td>Milne / Adams–Moulton</td><td><b>4 starting values</b> (use RK4)</td></tr><tr><td>Jacobi / Gauss–Seidel</td><td>converge if <b>strictly diagonally dominant</b></td></tr><tr><td>Power method</td><td>eigenvectors must be <b>linearly independent</b></td></tr><tr><td>All trigonometry</td><td><b>Radians</b></td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+
+<h3>Method summaries in one line each</h3>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Method</th><th>One-line description</th></tr></thead><tbody><tr><td>Newton Forward</td><td>Interpolate near start; Δ and top diagonal</td></tr><tr><td>Newton Backward</td><td>Interpolate near end; ∇ and bottom row</td></tr><tr><td>Lagrange</td><td>Direct interpolation, any spacing, no table needed</td></tr><tr><td>Divided Difference</td><td>Newton-style interpolation for unequal spacing</td></tr><tr><td>Richardson</td><td>Combine h and h/2 results to cancel leading error</td></tr><tr><td>Trapezoidal</td><td>Integrate by fitting straight lines</td></tr><tr><td>Simpson 1/3</td><td>Integrate by fitting parabolas (even n)</td></tr><tr><td>Simpson 3/8</td><td>Integrate by fitting cubics (n divisible by 3)</td></tr><tr><td>Romberg</td><td>Richardson applied to Trapezoidal</td></tr><tr><td>Taylor Series</td><td>Expand solution; needs higher derivatives</td></tr><tr><td>Euler</td><td>One tangent step; least accurate</td></tr><tr><td>Modified Euler</td><td>Average of two slopes; predictor–corrector</td></tr><tr><td>RK4</td><td>Weighted average of four slopes; most used</td></tr><tr><td>Milne</td><td>Multi-step P–C from Newton <b>forward</b></td></tr><tr><td>Adams–Moulton</td><td>Multi-step P–C from Newton <b>backward</b></td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+
+<h3>Diagrams you should be able to recognise</h3>
+<div class="tablewrap tablewrap--wrap"><table><thead><tr><th>Diagram</th><th>What it shows</th><th>How it's tested</th></tr></thead><tbody><tr><td>Difference table</td><td>Triangular array of differences</td><td>“Construct the table” — very common</td></tr><tr><td>Euler tangent line</td><td>Curve approximated by tangent at (t₀,y₀)</td><td>“Euler is based on the ___” → tangent</td></tr><tr><td>Modified Euler lines</td><td>L₁ slope at t₀, L₂ slope at t₁, L average</td><td>“Uses the average of two slopes”</td></tr><tr><td>Trapezoid vs rectangle</td><td>Less “missing” area under the curve</td><td>“…because we used ___” → trapezoids</td></tr><tr><td>Simpson's parabola</td><td>Quadratic fitted over a pair of strips</td><td>“f(x) is of the form ax²+bx+c”</td></tr><tr><td>Pₙ(x) vs y(x) slopes</td><td>Curves meet at nodes, slopes differ</td><td>“Derivatives may differ” → TRUE</td></tr><tr><td>Romberg table</td><td>Triangular array of refined integrals</td><td>“Best value is bottom-right”</td></tr></tbody></table></div><p class="scrollhint">← swipe the table sideways →</p>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+<details class="sec" id="lastminute">
+  <summary class="sec__head">
+    <span class="sec__num">18</span>
+    <span class="sec__titlewrap">
+      <span class="sec__title">Last-minute sheet — read this in the final 15 minutes</span>
+      <span class="sec__meta"><span class="pill pill--must">Must know</span><span class="pill pill--low">Final revision</span><span class="pill pill--done" style="display:none">✓ Studied</span></span>
+    </span>
+    <span class="sec__chev">▶</span>
+  </summary>
+  <div class="sec__body">
+    
+<div class="box box--exam"><span class="box__label">Exam alert</span><p><b>Read only this in the last 15 minutes before you walk in.</b> Nothing else.</p></div>
+
+<div class="slip slip--key"><span class="slip__tab">THE OPERATORS</span><div class="slip__body">Δ = E − 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∇ = 1 − E⁻¹&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;δ = E^½ − E^−½
+μ = ½(E^½ + E^−½)&nbsp;&nbsp;E = e^(hD)
+hD = log(1+Δ) = −log(1−∇)
+Δ − ∇ = Δ∇ = δ²&nbsp;&nbsp;&nbsp;&nbsp;μ² = 1 + δ²/4&nbsp;&nbsp;&nbsp;&nbsp;E^½ = μ + δ/2
+Eⁿf(x) = f(x+nh)&nbsp;&nbsp;&nbsp;E⁻¹f(x) = f(x−h)</div></div>
+
+<div class="slip slip--key"><span class="slip__tab">THE TWO NEWTON FORMULAS</span><div class="slip__body">FORWARD:&nbsp; p = (x − x₀)/h
+→ y₀ + pΔy₀ + p(p−1)/2! Δ²y₀ + p(p−1)(p−2)/3! Δ³y₀
+
+BACKWARD: p = (x − xₙ)/h
+→ yₙ + p∇yₙ + p(p+1)/2! ∇²yₙ + p(p+1)(p+2)/3! ∇³yₙ
+
+<b>FORWARD = FIRST point = MINUS
+BACKWARD = BOTTOM = PLUS</b></div></div>
+
+<div class="slip slip--key"><span class="slip__tab">SPACING RULE</span><div class="slip__body">Δ, ∇, δ, Newton F/B&nbsp;&nbsp;&nbsp;&nbsp;→&nbsp; EQUAL spacing required
+Lagrange, Divided Diff&nbsp;→&nbsp; UNEQUAL spacing OK</div></div>
+
+<div class="slip slip--key"><span class="slip__tab">DERIVATIVES</span><div class="slip__body">y′ (2-point central) = (yᵢ₊₁ − yᵢ₋₁)/2h
+y″ (3-point central) = (yᵢ₊₁ − 2yᵢ + yᵢ₋₁)/h²
+5-point y′ = [f(x₀−2h) − 8f(x₀−h) + 8f(x₀+h) − f(x₀+2h)]/12h
+Richardson = [4F(h/2) − F(h)]/3&nbsp;&nbsp;&nbsp;general: (4ᵐ…)/(4ᵐ−1)</div></div>
+
+<div class="slip slip--key"><span class="slip__tab">🔴 INTEGRATION — THE INTERVAL RULE</span><div class="slip__body">h = (b − a)/n&nbsp;&nbsp;&nbsp;&nbsp;n = (number of points) − 1
+
+Trapezoidal&nbsp; h/2&nbsp;&nbsp;[1, 2, 2, …, 2, 1]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n = ANY
+Simpson 1/3&nbsp; h/3&nbsp;&nbsp;[1, 4, 2, 4, …, 4, 1]&nbsp;&nbsp;n = EVEN
+Simpson 3/8&nbsp; 3h/8 [1, 3, 3, 2, 3, 3, …, 1] n = ×3
+
+ODD subscript → 4&nbsp;&nbsp;&nbsp;EVEN subscript → 2
+Line = Trapezoid | Parabola = 1/3 | Cubic = 3/8
+Romberg = Richardson applied to Trapezoidal</div></div>
+
+<div class="slip slip--key"><span class="slip__tab">ODEs</span><div class="slip__body">Euler:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yₙ₊₁ = yₙ + h·f(tₙ,yₙ)
+Modified Euler: yₙ₊₁ = yₙ + (h/2)[f(tₙ,yₙ) + f(tₙ₊₁, y⁽⁰⁾)]
+
+RK4: yₙ₊₁ = yₙ + (k₁ + 2k₂ + 2k₃ + k₄)/6
+&nbsp;&nbsp;&nbsp;&nbsp; k₁ = h f(tₙ,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yₙ)
+&nbsp;&nbsp;&nbsp;&nbsp; k₂ = h f(tₙ + h/2, yₙ + k₁/2)
+&nbsp;&nbsp;&nbsp;&nbsp; k₃ = h f(tₙ + h/2, yₙ + k₂/2)
+&nbsp;&nbsp;&nbsp;&nbsp; k₄ = h f(tₙ + h,&nbsp;&nbsp; yₙ + k₃)
+
+MILNE (from Newton FORWARD)
+&nbsp;P: yₙ₊₁ = yₙ₋₃ + (4h/3)(2y′ₙ₋₂ − y′ₙ₋₁ + 2y′ₙ)
+&nbsp;C: yₙ₊₁ = yₙ₋₁ + (h/3)(y′ₙ₋₁ + 4y′ₙ + y′ₙ₊₁)
+
+ADAMS–MOULTON (from Newton BACKWARD) ← most repeated MCQ
+&nbsp;P: yₙ₊₁ = yₙ + (h/24)(55y′ₙ − 59y′ₙ₋₁ + 37y′ₙ₋₂ − 9y′ₙ₋₃)
+&nbsp;C: yₙ₊₁ = yₙ + (h/24)(9y′ₙ₊₁ + 19y′ₙ − 5y′ₙ₋₁ + y′ₙ₋₂)
+&nbsp;Check: 55−59+37−9 = 24 ✔&nbsp;&nbsp;9+19−5+1 = 24 ✔</div></div>
+
+<div class="slip slip--key"><span class="slip__tab">SINGLE-STEP vs MULTI-STEP</span><div class="slip__body">SINGLE-STEP (self-starting): Taylor, Euler, Modified Euler, Runge–Kutta
+MULTI-STEP (need 4 values):&nbsp; Milne, Adams–Moulton → start with RK4</div></div>
+
+<div class="slip slip--key"><span class="slip__tab">TOP 12 ONE-LINERS</span><div class="slip__body">1.&nbsp; Muller's method needs 3 starting points
+2.&nbsp; Newton–Raphson = method of tangents, quadratic convergence
+3.&nbsp; Secant order of convergence = 1.618
+4.&nbsp; Simpson 1/3 is exact for CUBICS (degree of precision 3)
+5.&nbsp; Retaining r+1 terms → polynomial of degree r
+6.&nbsp; Sum of Lagrange coefficients = 1
+7.&nbsp; Eigenvalues of a symmetric matrix are REAL
+8.&nbsp; Power method → LARGEST eigenvalue; use A⁻¹ for smallest
+9.&nbsp; Normalized eigenvector: largest coordinate = 1
+10. Jacobi/Gauss–Seidel converge if strictly diagonally dominant
+11. Determinant of a diagonal matrix = product of diagonal elements
+12. ALL trig work in RADIANS</div></div>
+
+<h3>Exam tactics</h3>
+<ol>
+<li><b>Do the MCQs first.</b> They are the bulk of the marks and the fastest.</li>
+<li>On any integration question, <b>count the intervals before choosing a rule.</b> n = points − 1.</li>
+<li>On any interpolation question, <b>check spacing first</b>: equal → Newton; unequal → Lagrange or divided difference.</li>
+<li><b>Write the formula before substituting.</b> Method marks are awarded even if the arithmetic slips.</li>
+<li>In RK4, <b>compute k₁ → k₄ in strict order</b> and list them. Never try to do it in one line.</li>
+<li>If you cannot finish a numerical, <b>still write the formula and the substitution</b> — that is most of the marks.</li>
+<li>Keep <b>4 decimal places</b> throughout; round only at the very end.</li>
+</ol>
+
+<div class="box box--tip"><span class="box__label">One last thing</span><p>You have covered the whole syllabus. Walk in knowing the operator identities, the interval rules, and the four k's — those three things alone carry a large share of the paper. Good luck.</p></div>
+
+    <div style="margin-top:22px"><button class="btn btn--ghost doneBtn" type="button">Mark studied</button></div>
+  </div>
+</details>
+
+</main>
+
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Contents">
+  <div class="drawer__scrim"></div>
+  <div class="drawer__panel">
+    <button class="drawer__grip" id="drawerClose" type="button" aria-label="Close contents"></button>
+    <h2 class="drawer__title">Contents</h2>
+    <ul class="toc" id="tocList"></ul>
+  </div>
+</div>
+
+<button class="totop" id="toTop" type="button" aria-label="Back to top">↑</button>
+
+<script src="app.js"></script>
+</body>
+</html>
